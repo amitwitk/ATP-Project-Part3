@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<GridPane alignment="CENTER" gridLinesVisible="true" hgap="10" prefHeight="109.0" prefWidth="182.0" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -12,8 +11,4 @@
       <RowConstraints />
       <RowConstraints />
    </rowConstraints>
-   <children>
-      <Button mnemonicParsing="false" onAction="#start_click" text="start" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" onAction="#orSaysClick" text="or says" />
-   </children>
 </GridPane>
