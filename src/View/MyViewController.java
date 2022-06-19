@@ -8,4 +8,5 @@ public class MyViewController implements IView{
         System.out.println("amit the king");
     }
 
+
 }

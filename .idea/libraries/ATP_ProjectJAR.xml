@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ATP-ProjectJAR">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../ATP-ProjectJAR.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
