@@ -6,7 +6,9 @@ public class MyViewController implements IView{
     }
     public void orSaysClick(){
         System.out.println("amit the king");
+        System.out.println("works?");
     }
+
 
 
 
