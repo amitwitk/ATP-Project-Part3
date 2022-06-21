@@ -14,16 +14,30 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 
+
 public class MazeDisplay extends Canvas {
     private Maze maze;
     //Solution solution;
     private int row_index =0;
     private int col_index =0;
+    private int Goal_Row;
+    private int Goal_Col;
 
 
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    StringProperty imageFileNameroad = new SimpleStringProperty();
+    private String getImageFileNameRoad() {
+        return imageFileNameroad.get();
+    }
+    public String imageFileNameroadProperty() {
+        return imageFileNameroad.get();
+    }
+
+    public void setImageFileNameroad(String imageFileNameroad) {
+        this.imageFileNameroad.set(imageFileNameroad);
+    }
 
 
     public int getPlayerRow() {
@@ -68,6 +82,10 @@ public class MazeDisplay extends Canvas {
 
     public void drawMaze(Maze maze) {
         this.maze = maze;
+        this.row_index=maze.getStartPosition().getRowIndex();
+        this.col_index=maze.getStartPosition().getColumnIndex();
+        this.Goal_Col= maze.getGoalPosition().getColumnIndex();
+        this.Goal_Row=maze.getGoalPosition().getRowIndex();
         draw();
     }
 
@@ -93,11 +111,13 @@ public class MazeDisplay extends Canvas {
         graphicsContext.setFill(Color.AQUAMARINE);
 
         Image wallImage = null;
+        Image roadImage = null;
         try{
             wallImage = new Image(new FileInputStream(getImageFileNameWall()));
         } catch (FileNotFoundException e) {
             System.out.println("There is no wall image file");
         }
+
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -113,19 +133,32 @@ public class MazeDisplay extends Canvas {
                         graphicsContext.drawImage(wallImage, x, y, cellWidth, cellHeight);
                 }
                 else{
-                    double x = j * cellWidth;
-                    double y = i * cellHeight;
-                    graphicsContext.setFill(Color.WHITE);
-                    graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+                    if (j == Goal_Col&& i== Goal_Row){
+                        double x = j * cellWidth;
+                        double y = i * cellHeight;
+                        graphicsContext.setFill(Color.BLACK);
+                        graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+                    }
+                    else {
+                        double x = j * cellWidth;
+                        double y = i * cellHeight;
+                            graphicsContext.setFill(Color.WHITE);
+                            graphicsContext.fillRect(x, y, cellWidth, cellHeight);
 
+                    }
                 }
+
+
             }
         }
     }
+
+
+
     private void drawPlayer(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
-        graphicsContext.setFill(Color.GREEN);
+        graphicsContext.setFill(Color.RED);
 
         Image playerImage = null;
         try {

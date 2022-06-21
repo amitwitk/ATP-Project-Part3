@@ -12,3 +12,12 @@ Button:hover{
     -fx-background-color: linear-gradient(#12e136, #50e58d);
     -fx-text-fill: #000000;
 }
+canvas:hover{
+    
+    -fx-padding-top: 50px ;
+    -fx-padding-left: 50px ;
+    -fx-padding-right: 50px ;
+    -fx-padding-bottom: 50px ;
+    -fx-border-color: #AB4642;
+
+}
