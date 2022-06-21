@@ -11,20 +11,16 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 
 
 public class MazeDisplay extends Canvas {
-    Maze maze;
-    Solution solution;
-    int row_index;
-    int col_index;
+    private Maze maze;
+    //Solution solution;
+    private int row_index =0;
+    private int col_index =0;
 
-    public MazeDisplay(GraphicsConfiguration config, int row_index, int col_index) {
-        //super(config);
-        this.row_index = row_index;
-        this.col_index = col_index;
 
-    }
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
@@ -109,10 +105,19 @@ public class MazeDisplay extends Canvas {
                     //if it is a wall:
                     double x = j * cellWidth;
                     double y = i * cellHeight;
-                    if(wallImage == null)
+                    if(wallImage == null) {
+                        graphicsContext.setFill(Color.AQUAMARINE);
                         graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+                    }
                     else
                         graphicsContext.drawImage(wallImage, x, y, cellWidth, cellHeight);
+                }
+                else{
+                    double x = j * cellWidth;
+                    double y = i * cellHeight;
+                    graphicsContext.setFill(Color.WHITE);
+                    graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+
                 }
             }
         }

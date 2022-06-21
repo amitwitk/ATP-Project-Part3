@@ -8,3 +8,7 @@ Button{
     -fx-background-color: linear-gradient(#7cafc2,#86c1b9);
     -fx-text-fill: #000000;
 }
+Button:hover{
+    -fx-background-color: linear-gradient(#12e136, #50e58d);
+    -fx-text-fill: #000000;
+}
