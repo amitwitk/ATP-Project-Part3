@@ -1,34 +1,37 @@
 package View;
 
+import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MyViewController implements IView {
+public class MyViewController implements IView, Observer {
 
-    public MyMazeGenerator generator;
+    //public MyMazeGenerator generator;
     public TextField Col_textBox;
     public TextField Rows_textBox;
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
     public Label playerRow;
     public Label playerCol;
+    public MyViewModel ViewModel;
+    public ComboBox<String> ChooseAvatarBox;
+
+    private Maze maze;
+    public MazeDisplay mazeDisplayer;
+
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
     }
@@ -36,7 +39,9 @@ public class MyViewController implements IView {
     public ObservableList<String> avatars ;
 
 
-    public ComboBox<String> ChooseAvatarBox;
+
+
+
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
@@ -49,35 +54,25 @@ public class MyViewController implements IView {
     public void setUpdatePlayerCol(int updatePlayerCol) {
         this.updatePlayerCol.set(updatePlayerCol + "");
     }
-    public MazeDisplay mazeDisplayer;
+
+
     public void generateMazeButton () {
-
-        if (generator ==  null){
-            generator = new MyMazeGenerator();
-        }
-
-        int rows = Integer.valueOf(Rows_textBox.getText());
-        int cols = Integer.valueOf(Col_textBox.getText());
-
-        Maze maze = this.generator.generate(cols,rows);
+        ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
+        maze = ViewModel.getMaze();
         mazeDisplayer.drawMaze(maze);
-
-
     }
 
-    public void keyPressed(KeyEvent keyEvent) {
+    public void setViewModel(MyViewModel vm)
+    {
+        ViewModel = vm;
+    }
+
+    public void playerMove(KeyEvent keyevent) {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
-
-        switch (keyEvent.getCode()) {
-            case UP -> row -= 1;
-            case DOWN -> row += 1;
-            case RIGHT -> col += 1;
-            case LEFT -> col -= 1;
-        }
-        setPlayerPosition(row, col);
-
-        keyEvent.consume();
+        ViewModel.playerMove(keyevent);
+        setPlayerPosition(ViewModel.getPlayerRow(), ViewModel.getPlayerCol());
+        keyevent.consume();
     }
 
     public void setPlayerPosition(int row, int col){
@@ -108,4 +103,9 @@ public class MyViewController implements IView {
 
 
 
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 }

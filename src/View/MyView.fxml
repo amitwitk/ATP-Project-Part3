@@ -118,7 +118,7 @@
         <Pane onMouseClicked="#MazeDisplayMouseClicked" prefHeight="314.0" prefWidth="454.0" BorderPane.alignment="CENTER">
             <children>
                 <MazeDisplay fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="C:\Users\User\IdeaProjects\ATP-Project-Partc\src\resources\images\IcyTower.PNG" imageFileNameWall="C:\Users\User\IdeaProjects\ATP-Project-Partc\src\resources\images\Wall.PNG"
-                             onKeyPressed="#keyPressed" width="400.0" />
+                             onKeyPressed="#playerMove" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
