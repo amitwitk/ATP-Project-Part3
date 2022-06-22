@@ -52,10 +52,14 @@ public class MazeDisplay extends Canvas {
         return col_index;
     }
 
-    public void setPlayerPosition(int row, int col) {
+    public int setPlayerPosition(int row, int col) {
         this.row_index = row;
         this.col_index = col;
         draw();
+        if(row == Goal_Row&& col==Goal_Col){
+            return 1;
+        }
+        return 0;
     }
 
     public String getImageFileNameWall() {

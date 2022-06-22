@@ -2,7 +2,7 @@
     -fx-background-color: linear-gradient(#585858,#383838) ;
 }
 .label{
-    -fx-text-fill: F8F8F8;
+    -fx-text-fill: #ffffff;
 }
 Button{
     -fx-background-color: linear-gradient(#7cafc2,#86c1b9);
@@ -12,4 +12,18 @@ Button:hover{
     -fx-background-color: linear-gradient(#12e136, #50e58d);
     -fx-text-fill: #000000;
 }
+.dialog{
+    -fx-background-color: linear-gradient(to right, yellow,magenta);
 
+}
+.dialog > *.content.label{
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+.dialog:header *.header-panel{
+    -fx-background-color: linear-gradient(to right, yellow,magenta);
+}
+.dialog:header *.header-panel *.label{
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}

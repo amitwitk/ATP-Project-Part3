@@ -6,9 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -39,6 +37,8 @@ public class MyViewController implements IView, Observer {
     public MazeDisplay mazeDisplayer;
     public BorderPane myBorderPane;
     public Pane MazePane;
+    private Alert alert;
+    private DialogPane dialog;
 
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
@@ -64,7 +64,6 @@ public class MyViewController implements IView, Observer {
 
 
     public void generateMazeButton () {
-        ChooseAvatarBox.getItems().addAll(avatars);
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
         maze = ViewModel.getMaze();
         mazeDisplayer.drawMaze(maze);
@@ -84,9 +83,27 @@ public class MyViewController implements IView, Observer {
     }
 
     public void setPlayerPosition(int row, int col){
-        mazeDisplayer.setPlayerPosition(row, col);
-        setUpdatePlayerRow(row);
-        setUpdatePlayerCol(col);
+        if (mazeDisplayer.setPlayerPosition(row, col) == 0) {
+            setUpdatePlayerRow(row);
+            setUpdatePlayerCol(col);
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Cangragulations!you succesfully solved the maze!",ButtonType.YES);
+            alert.setHeaderText("Cangragulations!you succesfully solved the maze!");
+            alert.setContentText("To progress to the next level, press YES");
+            dialog = alert.getDialogPane();
+            dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
+            dialog.getStyleClass().add("dialog");
+            alert.showAndWait();
+            int newrow = Integer.parseInt(Rows_textBox.getText());
+            newrow = newrow*2;
+            Rows_textBox.setText("" + newrow);
+            int newCol = Integer.parseInt(Col_textBox.getText()) * 2;
+            Col_textBox.setText("" + newCol);
+            ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()) , Integer.parseInt(Col_textBox.getText()) );
+            maze = ViewModel.getMaze();
+            mazeDisplayer.drawMaze(maze);
+        }
     }
     public void setOnScroll(ScrollEvent scroll) {
         if (scroll.isControlDown()) {
