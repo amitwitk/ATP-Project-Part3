@@ -9,8 +9,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import javafx.geometry.Rectangle2D;
 import java.util.Observer;
 
 public class Main extends Application {
@@ -20,21 +22,27 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Maze Game");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Scene scene = new Scene(root, 400, 300);
+        primaryStage.setScene(scene);
         primaryStage.show();
+
         IModel model = new MyModel();
         MyViewModel ViewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
+        view.set_Resize(scene);
         view.setViewModel(ViewModel);
         ViewModel.addObserver((Observer)view);
 
 
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
 
 
     public static void main(String[] args) {

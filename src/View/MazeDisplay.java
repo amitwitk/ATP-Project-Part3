@@ -28,6 +28,10 @@ public class MazeDisplay extends Canvas {
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
     StringProperty imageFileNameroad = new SimpleStringProperty();
+    public MazeDisplay(){
+        widthProperty().addListener(e->draw());
+        heightProperty().addListener(e->draw());
+    }
     private String getImageFileNameRoad() {
         return imageFileNameroad.get();
     }
@@ -142,7 +146,7 @@ public class MazeDisplay extends Canvas {
                     else {
                         double x = j * cellWidth;
                         double y = i * cellHeight;
-                            graphicsContext.setFill(Color.WHITE);
+                            graphicsContext.setFill(Color.SANDYBROWN);
                             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
 
                     }
