@@ -2,6 +2,7 @@ package View;
 
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -13,10 +14,13 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Scale;
 
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -32,6 +36,7 @@ public class MyViewController implements IView, Observer {
     public Label playerCol;
     public MyViewModel ViewModel;
     public ComboBox<String> ChooseAvatarBox;
+
     private String[] avatars={"Icy Tower", "sonicX"};
     private Maze maze;
     public MazeDisplay mazeDisplayer;
@@ -39,36 +44,26 @@ public class MyViewController implements IView, Observer {
     public Pane MazePane;
     private Alert alert;
     private DialogPane dialog;
-
+    MediaPlayer mediaPlayer;
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
     }
-
-
-
-
-
-
-
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
     }
-
     public String getUpdatePlayerCol() {
         return updatePlayerCol.get();
     }
-
     public void setUpdatePlayerCol(int updatePlayerCol) {
         this.updatePlayerCol.set(updatePlayerCol + "");
     }
-
-
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
         maze = ViewModel.getMaze();
         mazeDisplayer.drawMaze(maze);
-    }
 
+
+    }
     public void setViewModel(MyViewModel vm)
     {
         ViewModel = vm;
@@ -103,6 +98,8 @@ public class MyViewController implements IView, Observer {
             ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()) , Integer.parseInt(Col_textBox.getText()) );
             maze = ViewModel.getMaze();
             mazeDisplayer.drawMaze(maze);
+
+
         }
     }
     public void setOnScroll(ScrollEvent scroll) {
@@ -120,8 +117,6 @@ public class MyViewController implements IView, Observer {
             scroll.consume();
         }
     }
-
-
     public void set_Resize(Scene scene){
         mazeDisplayer.widthProperty().bind(MazePane.widthProperty());
         mazeDisplayer.heightProperty().bind(MazePane.heightProperty());
@@ -134,6 +129,7 @@ public class MyViewController implements IView, Observer {
 
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
@@ -142,10 +138,9 @@ public class MyViewController implements IView, Observer {
     public void MazeDisplayMouseClicked(MouseEvent mouseEvent) {
         mazeDisplayer.requestFocus();
     }
-
-
-
-
+    public void sovleMazeButton(){
+        mazeDisplayer.drawSol(ViewModel.solveMaze());
+    }
     @Override
     public void update(Observable o, Object arg) {
 

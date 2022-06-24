@@ -3,8 +3,11 @@ package View;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -61,7 +64,46 @@ public class MazeDisplay extends Canvas {
         }
         return 0;
     }
+    public void drawSol(Solution solution){
+        if (solution == null){
+            return;
+        }
+        double canvasHeight = getHeight();
+        double canvasWidth = getWidth();
+        int rows = maze.getRows();
+        int cols = maze.getColumns();
 
+        double cellHeight = canvasHeight / rows;
+        double cellWidth = canvasWidth / cols;
+
+        GraphicsContext graphicsContext = getGraphicsContext2D();
+        //clear the canvas:
+        graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
+        drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
+        drawMazeSolution(solution,graphicsContext, cellHeight, cellWidth);
+        drawPlayer(graphicsContext, cellHeight, cellWidth);
+    }
+    public void drawMazeSolution(Solution solution,GraphicsContext graphicsContext, double cellHeight, double cellWidth){
+        ArrayList<AState> sol = solution.getSolutionPath();
+        for (int i=0; i<sol.size(); i++){
+            int SolRow = ((MazeState) sol.get(i)).getRow();
+            int SolCol = ((MazeState) sol.get(i)).getCol();
+            if (SolCol == Goal_Col && SolRow == Goal_Row){
+                continue;
+            }
+            else {
+                double x = SolCol * cellWidth;
+                double y = SolRow * cellHeight;
+
+                graphicsContext.setFill(Color.LIGHTGREEN);
+                graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+            }
+
+        }
+
+
+
+    }
     public String getImageFileNameWall() {
         return imageFileNameWall.get();
     }
@@ -150,7 +192,7 @@ public class MazeDisplay extends Canvas {
                     else {
                         double x = j * cellWidth;
                         double y = i * cellHeight;
-                            graphicsContext.setFill(Color.SANDYBROWN);
+                            graphicsContext.setFill(Color.HONEYDEW);
                             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
 
                     }

@@ -4,6 +4,7 @@ import Model.IModel;
 import Model.MyModel;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.scene.control.Alert;
 
 import javafx.scene.input.KeyEvent;
@@ -104,5 +105,8 @@ public class MyViewModel extends Observable implements Observer {
 
         }
 
+    public Solution solveMaze() {
+        return model.solveMaze();
     }
+}
 

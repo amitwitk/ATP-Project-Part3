@@ -15,6 +15,7 @@ public class MyModel extends Observable implements IModel {
     private int playerRow;
 
     private int playerCol;
+    ISearchingAlgorithm solver = new BestFirstSearch();
 
     public MyModel() {
         this.generator = null;
@@ -22,6 +23,16 @@ public class MyModel extends Observable implements IModel {
         this.solution = null;
         playerCol =0;
         playerRow =0;
+    }
+
+    public Solution solveMaze() {
+        if (maze !=null){
+            SearchableMaze searchableMaze = new SearchableMaze(maze);
+            ISearchable problem = searchableMaze;
+            solution = solver.solve(problem);
+            return solution;
+        }
+        return null;
     }
 
     public Maze getMaze() {
