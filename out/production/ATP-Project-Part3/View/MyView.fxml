@@ -40,6 +40,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -47,8 +48,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 <?import View.MazeDisplay?>
+
 <BorderPane fx:id="myBorderPane" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="137.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -59,19 +60,20 @@
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.199951171875" minWidth="0.0" prefWidth="76.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <Label text="Maze rows:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Label text="Maze columns:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="Rows_textBox" text="50" GridPane.columnIndex="1" />
-                    <TextField fx:id="Col_textBox" text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Button onAction="#generateMazeButton" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                    <Button fx:id="SolveMazeButton" cancelButton="true" onAction="#sovleMazeButton" prefHeight="26.0" prefWidth="172.0" text="Hint" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-               <ComboBox fx:id="ChooseAvatarBox" prefHeight="26.0" prefWidth="165.0" promptText="Choose your avatar" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                    <Label text="Maze rows:" GridPane.rowIndex="1" />
+                    <Label text="Maze columns:" GridPane.rowIndex="2" />
+                    <TextField fx:id="Rows_textBox" text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="Col_textBox" text="50" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button onAction="#generateMazeButton" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                    <Button fx:id="SolveMazeButton" cancelButton="true" onAction="#sovleMazeButton" prefHeight="26.0" prefWidth="172.0" text="Hint" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+               <ComboBox fx:id="ChooseAvatarBox" prefHeight="26.0" prefWidth="165.0" promptText="Choose your avatar" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                <padding>
                   <Insets bottom="10.0" />
                </padding>
@@ -94,22 +96,33 @@
             <children>
                 <MenuBar>
                     <menus>
-                        <Menu mnemonicParsing="false" text="File">
+                        <Menu fx:id="file_button" mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
+                                <MenuItem fx:id="new_button" mnemonicParsing="false" text="New" onAction="#new_maze" />
+                        <MenuItem fx:id="save_button" mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
+                        <Menu fx:id="options_button" mnemonicParsing="false" text="Options">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
+                                <MenuItem fx:id="propreties_button" mnemonicParsing="false" text="Propreties" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                            </items>
-                        </Menu>
+                        <Menu fx:id="exit_button" mnemonicParsing="false" text="Exit" />
+                  <Menu fx:id="help_button" mnemonicParsing="false" text="Help">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+                  <Menu fx:id="about_button" mnemonicParsing="false" text="About">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
                     </menus>
+               <effect>
+                  <ColorAdjust />
+               </effect>
                 </MenuBar>
             </children>
         </VBox>
@@ -117,7 +130,7 @@
     <center>
         <Pane fx:id="MazePane" onMouseClicked="#MazeDisplayMouseClicked" prefHeight="314.0" prefWidth="454.0" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplay fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="C:\Users\User\IdeaProjects\ATP-Project-Partc\src\resources\images\IcyTower.PNG" imageFileNameWall="C:\Users\User\IdeaProjects\ATP-Project-Partc\src\resources\images\Wall.PNG" onKeyPressed="#playerMove" width="400.0" />
+                <MazeDisplay fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="src\resources\images\IcyTower.PNG" imageFileNameWall="src\resources\images\Wall.PNG" onKeyPressed="#playerMove" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
