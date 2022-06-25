@@ -16,7 +16,7 @@ public class MyModel extends Observable implements IModel  {
     private int playerRow;
 
     private int playerCol;
-    ISearchingAlgorithm solver = new BestFirstSearch();
+    ISearchingAlgorithm solver;
 
     private Server maze_generate_server;
 
@@ -37,8 +37,9 @@ public class MyModel extends Observable implements IModel  {
     public void solveMaze() {
         if (maze !=null){
             SearchableMaze searchableMaze = new SearchableMaze(maze);
-            ISearchable problem = searchableMaze;
-            solution = solver.solve(problem);
+            solver = new BestFirstSearch();
+            //ISearchable problem = searchableMaze;
+            solution = solver.solve(searchableMaze);
             setChanged();
             notifyObservers("solved");
         }
