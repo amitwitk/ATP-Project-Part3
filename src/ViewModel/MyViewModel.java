@@ -23,14 +23,45 @@ public class MyViewModel extends Observable implements Observer {
     private int playerRow;
     private int playerCol;
 
+    private Solution solution;
+
     public MyViewModel(IModel model) {
         this.model = model;
         this.maze = null;
         playerCol=0;
         playerRow =0;
     }
+
+    public Solution getSolution() {
+        return solution;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
+        if (o==model)
+        {
+            if (arg.equals("moved"))
+            {
+                playerRow = model.getPlayerRow();
+                playerCol= model.getPlayerCol();
+                setChanged();
+                notifyObservers("moved");
+            }
+            if (arg.equals("generated"))
+            {
+                maze = model.getMaze();
+                playerCol = model.getPlayerCol();
+                playerRow= model.getPlayerRow();
+                setChanged();
+                notifyObservers("generated");
+            }
+            if (arg.equals("solved"))
+            {
+                solution = model.getSolution();
+                setChanged();
+                notifyObservers("solved");
+            }
+        }
 
     }
 
@@ -43,10 +74,7 @@ public class MyViewModel extends Observable implements Observer {
         }
         else {
             model.generateMaze(row, col);
-            maze = model.getMaze();
-            playerCol = model.getPlayerCol();
-            playerRow= model.getPlayerRow();
-            notifyObservers();
+
         }
     }
 
@@ -99,14 +127,12 @@ public class MyViewModel extends Observable implements Observer {
                 break;
         }
         model.playerMove(direction);
-        playerRow = model.getPlayerRow();
-        playerCol= model.getPlayerCol();
-        notifyObservers();
+
 
         }
 
-    public Solution solveMaze() {
-        return model.solveMaze();
+    public void solveMaze() {
+         model.solveMaze();
     }
 }
 

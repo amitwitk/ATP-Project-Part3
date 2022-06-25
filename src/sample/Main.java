@@ -41,6 +41,9 @@ public class Main extends Application {
         view.set_Resize(scene);
         view.setViewModel(ViewModel);
         ViewModel.addObserver((Observer)view);
+        MyModel mymodel = (MyModel)model;
+        mymodel.addObserver(ViewModel);
+
 
 
 

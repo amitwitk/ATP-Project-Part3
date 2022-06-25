@@ -45,6 +45,13 @@ public class MyViewController implements IView, Observer {
     private Alert alert;
     private DialogPane dialog;
     MediaPlayer mediaPlayer;
+
+    public MenuItem new_button;
+
+    public void new_maze()
+    {
+        generateMazeButton();
+    }
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
     }
@@ -59,8 +66,7 @@ public class MyViewController implements IView, Observer {
     }
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
-        maze = ViewModel.getMaze();
-        mazeDisplayer.drawMaze(maze);
+
 
 
     }
@@ -73,7 +79,6 @@ public class MyViewController implements IView, Observer {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
         ViewModel.playerMove(keyevent);
-        setPlayerPosition(ViewModel.getPlayerRow(), ViewModel.getPlayerCol());
         keyevent.consume();
     }
 
@@ -139,10 +144,28 @@ public class MyViewController implements IView, Observer {
         mazeDisplayer.requestFocus();
     }
     public void sovleMazeButton(){
-        mazeDisplayer.drawSol(ViewModel.solveMaze());
+        ViewModel.solveMaze();
     }
     @Override
     public void update(Observable o, Object arg) {
+        if (o== ViewModel)
+        {
+            if (arg.equals("moved"))
+            {
+                setPlayerPosition(ViewModel.getPlayerRow(), ViewModel.getPlayerCol());
+
+            }
+            if (arg.equals("generated"))
+            {
+                maze = ViewModel.getMaze();
+                mazeDisplayer.drawMaze(maze);
+            }
+            //todo maybe save solution here also
+            if (arg.equals("solved"))
+            {
+                mazeDisplayer.drawSol(ViewModel.getSolution());
+            }
+        }
 
     }
 }

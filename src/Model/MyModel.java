@@ -1,12 +1,13 @@
 package Model;
 
 
+import Server.*;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
 import java.util.Observable;
 
-public class MyModel extends Observable implements IModel {
+public class MyModel extends Observable implements IModel  {
 
     public MyMazeGenerator generator;
     private Maze maze;
@@ -17,22 +18,30 @@ public class MyModel extends Observable implements IModel {
     private int playerCol;
     ISearchingAlgorithm solver = new BestFirstSearch();
 
+    private Server maze_generate_server;
+
+    private Server maze_solver_server;
+
+
     public MyModel() {
         this.generator = null;
         this.maze = null;
         this.solution = null;
-        playerCol =0;
-        playerRow =0;
+        playerCol = 0;
+        playerRow = 0;
+
+//        maze_generate_server = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+//        maze_solver_server = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
     }
 
-    public Solution solveMaze() {
+    public void solveMaze() {
         if (maze !=null){
             SearchableMaze searchableMaze = new SearchableMaze(maze);
             ISearchable problem = searchableMaze;
             solution = solver.solve(problem);
-            return solution;
+            setChanged();
+            notifyObservers("solved");
         }
-        return null;
     }
 
     public Maze getMaze() {
@@ -92,7 +101,8 @@ public class MyModel extends Observable implements IModel {
                 }
                 break;
         }
-        notifyObservers();
+        setChanged();
+        notifyObservers("moved");
 
 
 
@@ -126,9 +136,14 @@ public class MyModel extends Observable implements IModel {
         this.maze = this.generator.generate(col,row);
         playerRow = maze.getStartPosition().getRowIndex();
         playerCol = maze.getStartPosition().getColumnIndex();
-        notifyObservers();
+        setChanged();
+        notifyObservers("generated");
 
 
+    }
+
+    public Solution getSolution() {
+        return solution;
     }
 
     public int getPlayerRow() {
@@ -138,4 +153,7 @@ public class MyModel extends Observable implements IModel {
     public int getPlayerCol() {
         return playerCol;
     }
+
+
+
 }
