@@ -83,8 +83,8 @@ public class MyViewController implements IView, Observer {
             setUpdatePlayerCol(col);
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Cangragulations!you succesfully solved the maze!",ButtonType.YES);
-            alert.setHeaderText("Cangragulations!you succesfully solved the maze!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Congratulations! You succesfully solved the maze!",ButtonType.YES);
+            alert.setHeaderText("Congratulations! You succesfully solved the maze!");
             alert.setContentText("To progress to the next level, press YES");
             dialog = alert.getDialogPane();
             dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());

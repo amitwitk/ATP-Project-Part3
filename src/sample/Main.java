@@ -26,8 +26,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        mediaPlayer = new AudioClip(this.getClass().getResource("resources/clips/icy_tower.mp3").toString());
-        mediaPlayer.play();
+        //mediaPlayer = new AudioClip(this.getClass().getResource("resources/clips/icy_tower.mp3").toString());
+        //mediaPlayer.play();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Maze Game");
