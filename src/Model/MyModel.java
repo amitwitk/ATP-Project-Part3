@@ -157,7 +157,8 @@ public class MyModel extends Observable implements IModel  {
 
 
         }
-
+    public void Load(File my_file){
+    }
 
 
     public void  save(File my_file){
@@ -170,7 +171,8 @@ public class MyModel extends Observable implements IModel  {
             notifyObservers("saved");
         }
         catch(Exception e){
-            e.printStackTrace();
+            setChanged();
+            notifyObservers("not saved");
 
         }
 

@@ -17,4 +17,6 @@ public interface IModel {
     public Solution getSolution();
 
     public void save(File my_file);
+
+    public void Load(File my_file);
 }

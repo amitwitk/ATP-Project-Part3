@@ -64,9 +64,15 @@ public class MyViewModel extends Observable implements Observer {
                 setChanged();
                 notifyObservers("solved");
             }
-            if (arg.equals("saved"))
+            if (arg.equals("saved")) {
                 setChanged();
-                notifyObservers("saved");
+                notifyObservers("saved");}
+            if (arg.equals("not saved"))
+            {
+                setChanged();
+                notifyObservers("not saved");
+            }
+
         }
 
     }
@@ -110,6 +116,10 @@ public class MyViewModel extends Observable implements Observer {
     public void save(File my_file) {
         model.save(my_file);
 
+    }
+
+    public void Load(File my_file) {
+        model.Load(my_file);
     }
 }
 

@@ -221,7 +221,15 @@ public class MyViewController implements IView, Observer {
             {
                 alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
                 alertInfo.setHeaderText("Save");
-                TextArea area = new TextArea("Save was successful");
+                alertInfo.setContentText("Save was successful");
+                alertInfo.showAndWait();
+            }
+            if (arg.equals("not saved"))
+            {
+                alertInfo = new Alert(Alert.AlertType.ERROR);
+                alertInfo.setHeaderText("Error saving");
+                alertInfo.setContentText("saving encountered a problem");
+                alertInfo.showAndWait();
             }
         }
     }
@@ -337,5 +345,12 @@ public class MyViewController implements IView, Observer {
     public void setStage(Stage s)
     {
         this.stage = s;
+    }
+
+    public void Load(ActionEvent actionEvent) {
+        FileChooser fs = new FileChooser();
+        fs.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze",".maze"));
+        File my_file = fs.showOpenDialog(stage);
+        ViewModel.Load(my_file);
     }
 }
