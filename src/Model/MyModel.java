@@ -157,16 +157,37 @@ public class MyModel extends Observable implements IModel  {
 
 
         }
-    public void Load(File my_file){
+    public void Load(File my_file)  {
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(my_file.getPath().toString()));
+            Maze maze = (Maze)in.readObject();
+            this.maze = maze;
+            playerRow = maze.getStartPosition().getRowIndex();
+            playerCol= maze.getStartPosition().getColumnIndex();
+            setChanged();
+            notifyObservers("loaded");
+        }
+        catch (Exception e)
+        {
+            setChanged();
+            notifyObservers(" not loaded");
+        }
+
     }
 
 
     public void  save(File my_file){
         try {
 
-            File new_file = new File(my_file.getPath());
-            new_file.createNewFile();
-            printToFile(maze, new_file.getPath());
+//            File new_file = new File(my_file.getPath());
+//            new_file.createNewFile();
+//            printToFile(maze, new_file.getPath());
+            FileOutputStream file = new FileOutputStream(my_file.getPath());
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(maze);
+            out.flush();
+            out.close();
+            file.close();
             setChanged();
             notifyObservers("saved");
         }

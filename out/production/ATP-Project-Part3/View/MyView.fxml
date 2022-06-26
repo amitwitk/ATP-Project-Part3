@@ -99,7 +99,7 @@
                             <items>
                                 <MenuItem fx:id="newMazeButton" mnemonicParsing="false" onAction="#new_maze" text="New" />
                         <MenuItem fx:id="save_button" mnemonicParsing="false" text="Save" onAction="#Save"/>
-                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" />
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" onAction="#Load"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">

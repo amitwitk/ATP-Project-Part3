@@ -231,6 +231,23 @@ public class MyViewController implements IView, Observer {
                 alertInfo.setContentText("saving encountered a problem");
                 alertInfo.showAndWait();
             }
+            if (arg.equals("loaded"))
+            {
+                maze = ViewModel.getMaze();
+                mazeDisplayer.drawMaze(maze);
+                mazeDisplayer.requestFocus();
+                alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
+                alertInfo.setHeaderText("Laod");
+                alertInfo.setContentText("Load was successful");
+                alertInfo.showAndWait();
+            }
+            if (arg.equals("not loaded"))
+            {
+                alertInfo = new Alert(Alert.AlertType.ERROR);
+                alertInfo.setHeaderText("Load");
+                alertInfo.setContentText("there was an error loading");
+                alertInfo.showAndWait();
+            }
         }
     }
     public void mouseDragged(MouseEvent mouseEvent) {

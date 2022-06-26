@@ -72,6 +72,19 @@ public class MyViewModel extends Observable implements Observer {
                 setChanged();
                 notifyObservers("not saved");
             }
+            if (arg.equals("loaded"))
+            {
+                maze = model.getMaze();
+                playerCol = model.getPlayerCol();
+                playerRow= model.getPlayerRow();
+                setChanged();
+                notifyObservers("loaded");
+            }
+            if (arg.equals("not loaded"))
+            {
+                setChanged();
+                notifyObservers("not loaded");
+            }
 
         }
 
