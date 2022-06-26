@@ -20,9 +20,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Scale;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
+import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Observable;
@@ -53,6 +56,8 @@ public class MyViewController implements IView, Observer {
     public MenuItem new_button;
     private double width;
     private double height;
+
+    public Stage stage;
     @FXML
     Button MuteButton;
 
@@ -88,40 +93,40 @@ public class MyViewController implements IView, Observer {
     public void playerMove(KeyEvent ke) {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
-        int direction =0;
-        switch (ke.getCode()) {
-            case NUMPAD1:
-                direction = 1;
-                break;
-            case DOWN:
-            case NUMPAD2:
-                direction = 2;
-                break;
-            case NUMPAD3:
-                direction = 3;
-                break;
-            case LEFT:
-            case NUMPAD4:
-                direction = 4;
-                break;
-            case NUMPAD5:
-                direction = 5;
-                break;
-            case RIGHT:
-            case NUMPAD6:
-                direction = 6;
-                break;
-            case NUMPAD7:
-                direction = 7;
-                break;
-            case UP:
-            case NUMPAD8:
-                direction = 8;
-                break;
-            case NUMPAD9:
-                direction = 9;
-                break;
-        }
+//        int direction =0;
+//        switch (ke.getCode()) {
+//            case NUMPAD1:
+//                direction = 1;
+//                break;
+//            case DOWN:
+//            case NUMPAD2:
+//                direction = 2;
+//                break;
+//            case NUMPAD3:
+//                direction = 3;
+//                break;
+//            case LEFT:
+//            case NUMPAD4:
+//                direction = 4;
+//                break;
+//            case NUMPAD5:
+//                direction = 5;
+//                break;
+//            case RIGHT:
+//            case NUMPAD6:
+//                direction = 6;
+//                break;
+//            case NUMPAD7:
+//                direction = 7;
+//                break;
+//            case UP:
+//            case NUMPAD8:
+//                direction = 8;
+//                break;
+//            case NUMPAD9:
+//                direction = 9;
+//                break;
+//        }
         ViewModel.playerMove(ke.getCode());
         ke.consume();
     }
@@ -212,6 +217,12 @@ public class MyViewController implements IView, Observer {
             {
                 mazeDisplayer.drawSol(ViewModel.getSolution());
             }
+            if (arg.equals("saved"))
+            {
+                alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
+                alertInfo.setHeaderText("Save");
+                TextArea area = new TextArea("Save was successful");
+            }
         }
     }
     public void mouseDragged(MouseEvent mouseEvent) {
@@ -240,7 +251,7 @@ public class MyViewController implements IView, Observer {
     }
     public void music() {
         if (mediaPlayer==null){
-            String s = "src/resources/clips/icy_tower.mp3";
+            String s = "resources/clips/icy_tower.mp3";
             Media h = new Media(Paths.get(s).toUri().toString());
             mediaPlayer = new MediaPlayer(h);
             mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -314,5 +325,17 @@ public class MyViewController implements IView, Observer {
         dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
         dialog.getStyleClass().add("dialog");
         alertAbout.showAndWait();
+    }
+
+    public void Save(ActionEvent actionEvent) {
+        FileChooser fs = new FileChooser();
+        fs.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze",".maze"));
+        File my_file = fs.showSaveDialog(stage);
+        ViewModel.save(my_file);
+    }
+
+    public void setStage(Stage s)
+    {
+        this.stage = s;
     }
 }

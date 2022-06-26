@@ -4,6 +4,8 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 
+import java.io.File;
+
 public interface IModel {
     void generateMaze(int row, int col);
     Maze getMaze();
@@ -13,4 +15,6 @@ public interface IModel {
     public int getPlayerCol();
 
     public Solution getSolution();
+
+    public void save(File my_file);
 }

@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -62,6 +64,9 @@ public class MyViewModel extends Observable implements Observer {
                 setChanged();
                 notifyObservers("solved");
             }
+            if (arg.equals("saved"))
+                setChanged();
+                notifyObservers("saved");
         }
 
     }
@@ -100,6 +105,11 @@ public class MyViewModel extends Observable implements Observer {
 
     public void solveMaze() {
          model.solveMaze();
+    }
+
+    public void save(File my_file) {
+        model.save(my_file);
+
     }
 }
 

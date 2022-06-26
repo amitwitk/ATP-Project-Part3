@@ -47,8 +47,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 <?import View.MazeDisplay?>
+
 <BorderPane fx:id="myBorderPane" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="137.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -98,8 +98,8 @@
                         <Menu mnemonicParsing="false" text="File">
                             <items>
                                 <MenuItem fx:id="newMazeButton" mnemonicParsing="false" onAction="#new_maze" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Load" />
+                        <MenuItem fx:id="save_button" mnemonicParsing="false" text="Save" onAction="#Save"/>
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
@@ -124,7 +124,7 @@
     <center>
         <Pane fx:id="MazePane" onMouseClicked="#MazeDisplayMouseClicked" prefHeight="314.0" prefWidth="454.0" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplay fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="src\resources\images\IcyTower.PNG" imageFileNameWall="src\resources\images\Wall.PNG" onKeyPressed="#playerMove" onMouseDragged="#mouseDragged" onScroll="#setOnScroll" width="400.0" />
+                <MazeDisplay fx:id="mazeDisplayer" height="400.0" imageFileNamePlayer="resources\images\IcyTower.PNG" imageFileNameWall="resources\images\Wall.PNG" onKeyPressed="#playerMove" onMouseDragged="#mouseDragged" onScroll="#setOnScroll" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

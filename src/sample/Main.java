@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -39,9 +40,12 @@ public class Main extends Application {
         MyViewController view = fxmlLoader.getController();
         view.set_Resize(scene);
         view.setViewModel(ViewModel);
+        view.setStage(primaryStage);
         ViewModel.addObserver((Observer)view);
         MyModel mymodel = (MyModel)model;
         mymodel.addObserver(ViewModel);
+//        FileChooser fs = new FileChooser();
+//        fs.showSaveDialog(primaryStage);
 
 
 
