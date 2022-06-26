@@ -8,26 +8,39 @@ Button{
     -fx-background-color: linear-gradient(#7cafc2,#86c1b9);
     -fx-text-fill: #000000;
 }
+
 Button:hover{
     -fx-background-color: linear-gradient(#12e136, #50e58d);
     -fx-text-fill: #000000;
 }
 .dialog{
-    -fx-background-color: linear-gradient(to right, yellow,magenta);
+    -fx-background-color: linear-gradient(to right, #00ff04, #fffb00);
 
 }
 .dialog > *.content.label{
-    -fx-font-size: 20px;
+    -fx-font-size: 10px;
     -fx-text-fill: black;
 }
 .dialog:header *.header-panel{
-    -fx-background-color: linear-gradient(to right, yellow,magenta);
+    -fx-background-color: linear-gradient(to right, #00ff04, #fffb00);
 }
 .dialog:header *.header-panel *.label{
     -fx-font-size: 20px;
     -fx-text-fill: black;
 }
+MenuBar{
+    -fx-background-color: linear-gradient(to right, #7cafc2,#86c1b9);
+}
+MenuBar *.label{
+    -fx-text-fill: Black;
 
-.menu {
-    -fx-text-fill: black;
+}
+MenuBar *.menu-item{
+    -fx-background-color: linear-gradient(to right, #7cafc2,#86c1b9);
+}
+MenuBar *.menu-item:hover{
+    -fx-background-color: linear-gradient(#12e136, #50e58d);
+}
+MenuBar *.menu:hover{
+    -fx-background-color: linear-gradient(#12e136, #50e58d);
 }

@@ -2,12 +2,13 @@ package Model;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import javafx.scene.input.KeyCode;
 
 public interface IModel {
     void generateMaze(int row, int col);
     Maze getMaze();
     public void solveMaze();
-    void playerMove(int direction);
+    void playerMove(KeyCode direction);
     public int getPlayerRow();
     public int getPlayerCol();
 

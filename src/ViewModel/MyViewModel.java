@@ -7,6 +7,7 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.control.Alert;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -74,7 +75,6 @@ public class MyViewModel extends Observable implements Observer {
         }
         else {
             model.generateMaze(row, col);
-
         }
     }
 
@@ -91,41 +91,8 @@ public class MyViewModel extends Observable implements Observer {
         return playerCol;
     }
 
-    public void playerMove(KeyEvent ke) {
-        int direction =0;
-        switch (ke.getCode()) {
-            case NUMPAD1:
-                direction = 1;
-                break;
-            case DOWN:
-            case NUMPAD2:
-                direction = 2;
-                break;
-            case NUMPAD3:
-                direction = 3;
-                break;
-            case LEFT:
-            case NUMPAD4:
-                direction = 4;
-                break;
-            case NUMPAD5:
-                direction = 5;
-                break;
-            case RIGHT:
-            case NUMPAD6:
-                direction = 6;
-                break;
-            case NUMPAD7:
-                direction = 7;
-                break;
-            case UP:
-            case NUMPAD8:
-                direction = 8;
-                break;
-            case NUMPAD9:
-                direction = 9;
-                break;
-        }
+    public void playerMove(KeyCode direction) {
+
         model.playerMove(direction);
 
 

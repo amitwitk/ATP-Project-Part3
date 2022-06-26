@@ -4,6 +4,7 @@ package Model;
 import Server.*;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
+import javafx.scene.input.KeyCode;
 
 import java.util.Observable;
 
@@ -50,51 +51,56 @@ public class MyModel extends Observable implements IModel  {
     }
 
     @Override
-    public void playerMove(int direction) {
+    public void playerMove(KeyCode direction) {
 
         switch(direction) {
-            case 1:
+
+            case NUMPAD1:
                 if (checkBoundary(playerRow + 1, playerCol - 1) && maze.getValue(playerCol - 1, playerRow + 1) == 0
                         && (maze.getValue(playerCol - 1, playerRow) == 0 || maze.getValue(playerCol, playerRow + 1) == 0)) {
                     playerRow += 1;
                     playerCol -= 1;
                 }
                 break;
-            case 2:
+            case NUMPAD2:
+            case DOWN:
                 if (checkBoundary(playerRow + 1, playerCol) && maze.getValue(playerCol, playerRow + 1) == 0) {
                     playerRow += 1;
                 }
                 break;
-            case 3:
+            case NUMPAD3:
                 if (checkBoundary(playerRow + 1, playerCol + 1) && maze.getValue(playerCol + 1, playerRow + 1) == 0
                         && (maze.getValue(playerCol + 1, playerRow) == 0 || maze.getValue(playerCol, playerRow + 1) == 0)) {
                     playerRow += 1;
                     playerCol += 1;
                 }
                 break;
-            case 4:
+            case LEFT:
+            case NUMPAD4:
                 if (checkBoundary(playerRow, playerCol - 1) && maze.getValue(playerCol - 1, playerRow) == 0) {
                     playerCol -= 1;
                 }
                 break;
-            case 6:
+            case RIGHT:
+            case NUMPAD6:
                 if (checkBoundary(playerRow, playerCol + 1) && maze.getValue(playerCol + 1, playerRow) == 0) {
                     playerCol += 1;
                 }
                 break;
-            case 7:
+            case NUMPAD7:
                 if (checkBoundary(playerRow - 1, playerCol - 1) && maze.getValue(playerCol - 1, playerRow - 1) == 0
                         && (maze.getValue(playerCol - 1, playerRow) == 0 || maze.getValue(playerCol, playerRow - 1) == 0)) {
                     playerRow -= 1;
                     playerCol -= 1;
                 }
                 break;
-            case 8:
+            case UP:
+            case NUMPAD8:
                 if (checkBoundary(playerRow - 1, playerCol) && maze.getValue(playerCol, playerRow - 1) == 0) {
                     playerRow -= 1;
                 }
                 break;
-            case 9:
+            case NUMPAD9:
                 if (checkBoundary(playerRow - 1, playerCol + 1) && maze.getValue(playerCol + 1, playerRow - 1) == 0
                         && (maze.getValue(playerCol + 1, playerRow) == 0 || maze.getValue(playerCol, playerRow - 1) == 0)) {
                     playerRow -= 1;

@@ -6,8 +6,11 @@ import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -17,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Scale;
+import javafx.util.Duration;
 
 
 import java.net.URL;
@@ -47,6 +51,10 @@ public class MyViewController implements IView, Observer {
     MediaPlayer mediaPlayer;
 
     public MenuItem new_button;
+    private double width;
+    private double height;
+    @FXML
+    Button MuteButton;
 
     public void new_maze()
     {
@@ -66,7 +74,9 @@ public class MyViewController implements IView, Observer {
     }
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
-
+        music();
+        width = mazeDisplayer.getScaleX();
+        height=mazeDisplayer.getScaleY();
 
 
     }
@@ -75,11 +85,45 @@ public class MyViewController implements IView, Observer {
         ViewModel = vm;
     }
 
-    public void playerMove(KeyEvent keyevent) {
+    public void playerMove(KeyEvent ke) {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
-        ViewModel.playerMove(keyevent);
-        keyevent.consume();
+        int direction =0;
+        switch (ke.getCode()) {
+            case NUMPAD1:
+                direction = 1;
+                break;
+            case DOWN:
+            case NUMPAD2:
+                direction = 2;
+                break;
+            case NUMPAD3:
+                direction = 3;
+                break;
+            case LEFT:
+            case NUMPAD4:
+                direction = 4;
+                break;
+            case NUMPAD5:
+                direction = 5;
+                break;
+            case RIGHT:
+            case NUMPAD6:
+                direction = 6;
+                break;
+            case NUMPAD7:
+                direction = 7;
+                break;
+            case UP:
+            case NUMPAD8:
+                direction = 8;
+                break;
+            case NUMPAD9:
+                direction = 9;
+                break;
+        }
+        ViewModel.playerMove(ke.getCode());
+        ke.consume();
     }
 
     public void setPlayerPosition(int row, int col){
@@ -119,6 +163,7 @@ public class MyViewController implements IView, Observer {
             newScale.setX(mazeDisplayer.getScaleX() * zoom_fac);
             newScale.setY(mazeDisplayer.getScaleY() * zoom_fac);
             mazeDisplayer.getTransforms().add(newScale);
+
             scroll.consume();
         }
     }
@@ -131,6 +176,8 @@ public class MyViewController implements IView, Observer {
         scene.heightProperty().addListener((observable, oldValue, newValue) -> {
             mazeDisplayer.heightProperty().bind(MazePane.heightProperty());
         });
+        width = mazeDisplayer.getScaleX();
+        height=mazeDisplayer.getScaleY();
 
 
     }
@@ -153,12 +200,12 @@ public class MyViewController implements IView, Observer {
             if (arg.equals("moved"))
             {
                 setPlayerPosition(ViewModel.getPlayerRow(), ViewModel.getPlayerCol());
-
             }
             if (arg.equals("generated"))
             {
                 maze = ViewModel.getMaze();
                 mazeDisplayer.drawMaze(maze);
+                mazeDisplayer.requestFocus();
             }
             //todo maybe save solution here also
             if (arg.equals("solved"))
@@ -166,6 +213,106 @@ public class MyViewController implements IView, Observer {
                 mazeDisplayer.drawSol(ViewModel.getSolution());
             }
         }
+    }
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if(ViewModel.getMaze() != null) {
+            int maximumSize = Math.max(ViewModel.getMaze().getColumns(), ViewModel.getMaze().getRows());
+            double mousePosX=helperMouseDragged(maximumSize,mazeDisplayer.getHeight(),
+                    ViewModel.getMaze().getRows(),mouseEvent.getX(),mazeDisplayer.getWidth() / maximumSize);
+            double mousePosY=helperMouseDragged(maximumSize,mazeDisplayer.getWidth(),
+                    ViewModel.getMaze().getColumns(),mouseEvent.getY(),mazeDisplayer.getHeight() / maximumSize);
+            if ( mousePosX == ViewModel.getPlayerCol() && mousePosY < ViewModel.getPlayerRow() )
+                ViewModel.playerMove(KeyCode.NUMPAD8);
+            else if (mousePosY == ViewModel.getPlayerRow() && mousePosX > ViewModel.getPlayerCol() )
+                ViewModel.playerMove(KeyCode.NUMPAD6);
+            else if ( mousePosY == ViewModel.getPlayerRow() && mousePosX < ViewModel.getPlayerCol() )
+                ViewModel.playerMove(KeyCode.NUMPAD4);
+            else if (mousePosX == ViewModel.getPlayerCol() && mousePosY > ViewModel.getPlayerRow()  )
+                ViewModel.playerMove(KeyCode.NUMPAD2);
 
+        }
+    }
+    private  double helperMouseDragged(int maxsize, double canvasSize, int mazeSize,double mouseEvent,double temp){
+        double cellSize=canvasSize/maxsize;
+        double start = (canvasSize / 2 - (cellSize * mazeSize / 2)) / cellSize;
+        double mouse = (int) ((mouseEvent) / (temp) - start);
+        return mouse;
+    }
+    public void music() {
+        if (mediaPlayer==null){
+            String s = "src/resources/clips/icy_tower.mp3";
+            Media h = new Media(Paths.get(s).toUri().toString());
+            mediaPlayer = new MediaPlayer(h);
+            mediaPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                    mediaPlayer.seek(Duration.ZERO);
+                }
+            });
+            mediaPlayer.play();
+            mediaPlayer.setVolume(0.02);
+        }
+
+    }
+    Boolean isMuted = false;
+    public void muteMusic(ActionEvent actionEvent) {
+        if (isMuted == false) {
+            mediaPlayer.stop();
+            MuteButton.setStyle("-fx-background-color: linear-gradient(#12e136, #50e58d)");
+            isMuted=true;
+        }
+        else {
+            mediaPlayer.play();
+            MuteButton.setStyle("-fx-background-color: linear-gradient(#7cafc2,#86c1b9)");
+            isMuted=false;
+        }
+
+    }
+    Alert alertInfo;
+
+    public void Help_button_func() {
+
+        alertInfo = new Alert(Alert.AlertType.INFORMATION);
+        alertInfo.setHeaderText("Rules:");
+        TextArea area = new TextArea("Please choose the size of the maze you want and type it in in rows and columns.\n" +
+                "Then, click \"generate maze\" to see your beautiful maze. \n" +
+                "Use the number pad/ arrows/ or drag with the mouse your player to the end point which is black. \n" +
+                "If you need some help you can click the hint button to see a possible solution. \n" +
+                "You can zoom in with ctrl+scroll. \n" +
+                "If you like the music that awesome but if you don't you can mute it with the mute button. \n" +
+                "Once you've made it to the end you can continue to next level. Good luck!\n");
+        area.setWrapText(true);
+        area.setEditable(false);
+        alertInfo.getDialogPane().setContent(area);
+        alertInfo.setResizable(true);
+        dialog = alertInfo.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
+        dialog.getStyleClass().add("dialog");
+        alertInfo.showAndWait();
+    }
+    Alert alertAbout;
+    public void AboutButton_func(ActionEvent actionEvent) {
+        alertAbout = new Alert(Alert.AlertType.INFORMATION);
+        alertAbout.setHeaderText("About:");
+        TextArea area = new TextArea("Searching Algorithms- \n" +
+                "1. Breadth First Search- It starts at the root and explores all nodes at the present depth prior to moving on to the nodes at the next depth level.\n" +
+                "2. Depth First Search- starts at the root and explores as far as possible along each branch before backtracking.\n" +
+                "3. Best First Search - like breadth first search but will give priority to path with the smallest \"cost\" in our case it will prefer a diagnol step over a non- diagnol \n" +
+                "\n" +
+                "Generating Algorithms-\n" +
+                "1. Empty Maze - will generate a maze withput walls\n" +
+                "2. Simple Maze - will generate a maze in a way that each cell is picked randomly \n" +
+                "3. My Maze - is based on Prim's algorithm \n" +
+                "\n" +
+                "The Creators-\n" +
+                "Amit Vitkovsky \n" +
+                "Or Fuchs\n");
+        area.setWrapText(true);
+        area.setEditable(false);
+        alertAbout.getDialogPane().setContent(area);
+        alertAbout.setResizable(true);
+        dialog = alertAbout.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
+        dialog.getStyleClass().add("dialog");
+        alertAbout.showAndWait();
     }
 }
