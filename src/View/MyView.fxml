@@ -47,8 +47,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import View.MazeDisplay?>
 
+<?import View.MazeDisplay?>
 <BorderPane fx:id="myBorderPane" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="137.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -104,10 +104,13 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                             <items>
-                                <MenuItem fx:id="prop_button" mnemonicParsing="false" text="Properties" onAction="#showProp" />
+                                <MenuItem fx:id="prop_button" mnemonicParsing="false" text="Properties" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Exit" />
+                        <Menu mnemonicParsing="false" text="Exit">
+                     <items>
+                        <MenuItem fx:id="exit_button" mnemonicParsing="false" text="Exit" onAction="#exitButtonFunc"/>
+                     </items></Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
                         <MenuItem fx:id="Help_button" mnemonicParsing="false" onAction="#Help_button_func" text="Help" />
