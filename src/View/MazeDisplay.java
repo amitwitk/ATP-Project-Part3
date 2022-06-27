@@ -19,7 +19,7 @@ import javafx.scene.image.Image;
 
 
 public class MazeDisplay extends Canvas {
-    private Maze maze;
+    private int[][] maze;
     //Solution solution;
     private int row_index =0;
     private int col_index =0;
@@ -64,14 +64,14 @@ public class MazeDisplay extends Canvas {
         }
         return 0;
     }
-    public void drawSol(Solution solution){
+    public void drawSol(ArrayList<javafx.geometry.Point2D> solution){
         if (solution == null){
             return;
         }
         double canvasHeight = getHeight();
         double canvasWidth = getWidth();
-        int rows = maze.getRows();
-        int cols = maze.getColumns();
+        int rows = maze.length;
+        int cols = maze[0].length;
 
         double cellHeight = canvasHeight / rows;
         double cellWidth = canvasWidth / cols;
@@ -83,11 +83,11 @@ public class MazeDisplay extends Canvas {
         drawMazeSolution(solution,graphicsContext, cellHeight, cellWidth);
         drawPlayer(graphicsContext, cellHeight, cellWidth);
     }
-    public void drawMazeSolution(Solution solution,GraphicsContext graphicsContext, double cellHeight, double cellWidth){
-        ArrayList<AState> sol = solution.getSolutionPath();
-        for (int i=0; i<sol.size(); i++){
-            int SolRow = ((MazeState) sol.get(i)).getRow();
-            int SolCol = ((MazeState) sol.get(i)).getCol();
+    public void drawMazeSolution(ArrayList<javafx.geometry.Point2D> solution,GraphicsContext graphicsContext, double cellHeight, double cellWidth){
+        //ArrayList<AState> sol = solution.getSolutionPath();
+        for (int i=0; i<solution.size(); i++){
+            int SolRow = (int)solution.get(i).getX();
+            int SolCol = (int)solution.get(i).getY();
             if (SolCol == Goal_Col && SolRow == Goal_Row){
                 continue;
             }
@@ -130,12 +130,13 @@ public class MazeDisplay extends Canvas {
 
 
 
-    public void drawMaze(Maze maze) {
+    public void drawMaze(int[][] maze , int start_row, int start_col, int end_row, int end_col) {
         this.maze = maze;
-        this.row_index=maze.getStartPosition().getRowIndex();
-        this.col_index=maze.getStartPosition().getColumnIndex();
-        this.Goal_Col= maze.getGoalPosition().getColumnIndex();
-        this.Goal_Row=maze.getGoalPosition().getRowIndex();
+        this.row_index=start_row;
+        this.col_index=start_col;
+        this.Goal_Col= end_col;
+        this.Goal_Row=end_row;
+
         draw();
     }
 
@@ -143,8 +144,8 @@ public class MazeDisplay extends Canvas {
         if(maze != null){
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
-            int rows = maze.getRows();
-            int cols = maze.getColumns();
+            int rows = maze.length;
+            int cols = maze[0].length;
 
             double cellHeight = canvasHeight / rows;
             double cellWidth = canvasWidth / cols;
@@ -171,7 +172,7 @@ public class MazeDisplay extends Canvas {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if(maze.getValue(j,i) == 1){
+                if(maze[i][j] == 1){
                     //if it is a wall:
                     double x = j * cellWidth;
                     double y = i * cellHeight;

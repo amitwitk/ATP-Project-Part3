@@ -1,8 +1,8 @@
 package View;
 
 import ViewModel.MyViewModel;
-import algorithms.mazeGenerators.Maze;
-import algorithms.search.Solution;
+//import algorithms.mazeGenerators.Maze;
+//import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -45,7 +45,7 @@ public class MyViewController implements IView, Observer {
     public ComboBox<String> ChooseAvatarBox;
 
     private String[] avatars={"Icy Tower", "sonicX"};
-    private Maze maze;
+    private int[][] maze;
     public MazeDisplay mazeDisplayer;
     public BorderPane myBorderPane;
     public Pane MazePane;
@@ -117,7 +117,7 @@ public class MyViewController implements IView, Observer {
             Col_textBox.setText("" + newCol);
             ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()) , Integer.parseInt(Col_textBox.getText()) );
             maze = ViewModel.getMaze();
-            mazeDisplayer.drawMaze(maze);
+            mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
 
 
         }
@@ -176,7 +176,7 @@ public class MyViewController implements IView, Observer {
             if (arg.equals("generated"))
             {
                 maze = ViewModel.getMaze();
-                mazeDisplayer.drawMaze(maze);
+                mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
                 mazeDisplayer.requestFocus();
             }
             //todo maybe save solution here also
@@ -201,7 +201,7 @@ public class MyViewController implements IView, Observer {
             if (arg.equals("loaded"))
             {
                 maze = ViewModel.getMaze();
-                mazeDisplayer.drawMaze(maze);
+                mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
                 mazeDisplayer.requestFocus();
                 alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
                 alertInfo.setHeaderText("Laod");
@@ -219,11 +219,11 @@ public class MyViewController implements IView, Observer {
     }
     public void mouseDragged(MouseEvent mouseEvent) {
         if(ViewModel.getMaze() != null) {
-            int maximumSize = Math.max(ViewModel.getMaze().getColumns(), ViewModel.getMaze().getRows());
+            int maximumSize = Math.max(ViewModel.getMaze()[0].length, ViewModel.getMaze().length);
             double mousePosX=helperMouseDragged(maximumSize,mazeDisplayer.getHeight(),
-                    ViewModel.getMaze().getRows(),mouseEvent.getX(),mazeDisplayer.getWidth() / maximumSize);
+                    ViewModel.getMaze().length,mouseEvent.getX(),mazeDisplayer.getWidth() / maximumSize);
             double mousePosY=helperMouseDragged(maximumSize,mazeDisplayer.getWidth(),
-                    ViewModel.getMaze().getColumns(),mouseEvent.getY(),mazeDisplayer.getHeight() / maximumSize);
+                    ViewModel.getMaze()[0].length,mouseEvent.getY(),mazeDisplayer.getHeight() / maximumSize);
             if ( mousePosX == ViewModel.getPlayerCol() && mousePosY < ViewModel.getPlayerRow() )
                 ViewModel.playerMove(KeyCode.NUMPAD8);
             else if (mousePosY == ViewModel.getPlayerRow() && mousePosX > ViewModel.getPlayerCol() )
@@ -296,6 +296,7 @@ public class MyViewController implements IView, Observer {
     }
     public void exitButtonFunc(){
         this.stage.close();
+        ViewModel.stopServers();
     }
     Alert alertAbout;
     public void AboutButton_func(ActionEvent actionEvent) {

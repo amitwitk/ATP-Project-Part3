@@ -3,14 +3,16 @@ package ViewModel;
 import Model.IModel;
 import Model.MyModel;
 
-import algorithms.mazeGenerators.Maze;
-import algorithms.search.Solution;
+//import algorithms.mazeGenerators.Maze;
+//import algorithms.search.Solution;
 import javafx.scene.control.Alert;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,22 +23,49 @@ import static javafx.scene.input.KeyCode.NUMPAD2;
 public class MyViewModel extends Observable implements Observer {
 
     public IModel model;
-    private Maze maze;
+    private int[][] maze;
 
     private int playerRow;
     private int playerCol;
 
-    private Solution solution;
+    private int start_row;
+    private int start_col;
+    private int end_row;
+    private int end_col ;
+
+    public int getStart_row() {
+        return start_row;
+    }
+
+    public int getStart_col() {
+        return start_col;
+    }
+
+    public int getEnd_row() {
+        return end_row;
+    }
+
+    public int getEnd_col() {
+        return end_col;
+    }
+
+    private ArrayList<javafx.geometry.Point2D> solution;
 
     public MyViewModel(IModel model) {
         this.model = model;
         this.maze = null;
         playerCol=0;
         playerRow =0;
+        start_col =0;
+        start_row = 0;
+        end_col =0;
+        end_row =0;
     }
 
-    public Solution getSolution() {
-        return solution;
+    public ArrayList<javafx.geometry.Point2D> getSolution() {
+        return model.getSolution();
+
+
     }
 
     @Override
@@ -53,8 +82,13 @@ public class MyViewModel extends Observable implements Observer {
             if (arg.equals("generated"))
             {
                 maze = model.getMaze();
-                playerCol = model.getPlayerCol();
-                playerRow= model.getPlayerRow();
+
+                start_row = model.getStart_row();
+                start_col = model.getStart_col();
+                end_row = model.getEnd_row();
+                end_col = model.getEnd_col();
+                playerRow = start_row;
+                playerCol= start_col;
                 setChanged();
                 notifyObservers("generated");
             }
@@ -75,8 +109,12 @@ public class MyViewModel extends Observable implements Observer {
             if (arg.equals("loaded"))
             {
                 maze = model.getMaze();
-                playerCol = model.getPlayerCol();
-                playerRow= model.getPlayerRow();
+                start_row = model.getStart_row();
+                start_col = model.getStart_col();
+                end_row = model.getEnd_row();
+                end_col = model.getEnd_col();
+                playerRow = start_row;
+                playerCol= start_col;
                 setChanged();
                 notifyObservers("loaded");
             }
@@ -103,7 +141,7 @@ public class MyViewModel extends Observable implements Observer {
     }
 
 
-    public Maze getMaze() {
+    public int[][] getMaze() {
         return maze;
     }
 
@@ -133,6 +171,10 @@ public class MyViewModel extends Observable implements Observer {
 
     public void Load(File my_file) {
         model.Load(my_file);
+    }
+
+    public void stopServers() {
+        model.stopServers();
     }
 }
 
