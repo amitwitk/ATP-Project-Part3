@@ -1,5 +1,7 @@
 package View;
 
+import Model.IModel;
+import Model.MyModel;
 import ViewModel.MyViewModel;
 //import algorithms.mazeGenerators.Maze;
 //import algorithms.search.Solution;
@@ -8,6 +10,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -26,6 +31,7 @@ import javafx.util.Duration;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.module.Configuration;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -62,6 +68,29 @@ public class MyViewController implements IView, Observer {
     public Stage stage;
     @FXML
     Button MuteButton;
+    Scene scene;
+    Parent root;
+    Stage Pstage;
+    public void Switch_to_scene2(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
+        Parent root = fxmlLoader.load();
+        Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root,400,300);
+        IModel model = new MyModel();
+        MyViewModel ViewModel = new MyViewModel(model);
+        MyViewController view = fxmlLoader.getController();
+        view.set_Resize(scene);
+        view.setViewModel(ViewModel);
+        view.setStage(Pstage);
+        ViewModel.addObserver((Observer)view);
+        MyModel mymodel = (MyModel)model;
+        mymodel.addObserver(ViewModel);
+        Pstage.setScene(scene);
+        Pstage.show();
+//        FileChooser fs = new FileChooser();
+//        fs.showSaveDialog(Pstage);
+
+    }
 
     public void new_maze()
     {

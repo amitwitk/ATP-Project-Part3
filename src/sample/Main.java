@@ -28,24 +28,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/MyView.fxml"));
-        Parent root = fxmlLoader.load();
+        Parent root  =  FXMLLoader.load(getClass().getResource("HeadStage.fxml"));
         primaryStage.setTitle("Maze Game");
         Scene scene = new Scene(root, 400, 300);
+        try {
+            scene.getStylesheets().add(getClass().getResource("Style1.css").toExternalForm());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        IModel model = new MyModel();
-        MyViewModel ViewModel = new MyViewModel(model);
-        MyViewController view = fxmlLoader.getController();
-        view.set_Resize(scene);
-        view.setViewModel(ViewModel);
-        view.setStage(primaryStage);
-        ViewModel.addObserver((Observer)view);
-        MyModel mymodel = (MyModel)model;
-        mymodel.addObserver(ViewModel);
-//        FileChooser fs = new FileChooser();
-//        fs.showSaveDialog(primaryStage);
 
 
 
