@@ -1,13 +1,9 @@
 package View;
-
 import Model.IModel;
 import Model.MyModel;
 import ViewModel.MyViewModel;
-//import algorithms.mazeGenerators.Maze;
-//import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,21 +23,16 @@ import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.module.Configuration;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MyViewController implements IView, Observer {
 
-    //public MyMazeGenerator generator;
     public TextField Col_textBox;
     public TextField Rows_textBox;
     StringProperty updatePlayerRow = new SimpleStringProperty();
@@ -58,19 +48,22 @@ public class MyViewController implements IView, Observer {
     public BorderPane myBorderPane;
     public Pane MazePane;
     private Alert alert;
+    Alert alertAbout;
     private DialogPane dialog;
     MediaPlayer mediaPlayer;
+    Boolean isMuted = false;
 
     public MenuItem new_button;
     private double width;
     private double height;
-
+    Alert alertInfo;
     public Stage stage;
     @FXML
     Button MuteButton;
     Scene scene;
     Parent root;
     Stage Pstage;
+
     public void Switch_to_scene2(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
@@ -78,7 +71,7 @@ public class MyViewController implements IView, Observer {
         scene = new Scene(root,400,300);
         IModel model = new MyModel();
         MyViewModel ViewModel = new MyViewModel(model);
-        MyViewController view = fxmlLoader.getController();
+        IView view = fxmlLoader.getController();
         view.set_Resize(scene);
         view.setViewModel(ViewModel);
         view.setStage(Pstage);
@@ -87,46 +80,25 @@ public class MyViewController implements IView, Observer {
         mymodel.addObserver(ViewModel);
         Pstage.setScene(scene);
         Pstage.show();
-//        FileChooser fs = new FileChooser();
-//        fs.showSaveDialog(Pstage);
-
     }
 
-    public void new_maze()
-    {
-        generateMazeButton();
-    }
-    public String getUpdatePlayerRow() {
-        return updatePlayerRow.get();
-    }
-    public void setUpdatePlayerRow(int updatePlayerRow) {
-        this.updatePlayerRow.set(updatePlayerRow + "");
-    }
-    public String getUpdatePlayerCol() {
-        return updatePlayerCol.get();
-    }
-    public void setUpdatePlayerCol(int updatePlayerCol) {
-        this.updatePlayerCol.set(updatePlayerCol + "");
-    }
+    public void new_maze(){generateMazeButton();}
+
+    public String getUpdatePlayerRow() {return updatePlayerRow.get();}
+    public void setUpdatePlayerRow(int updatePlayerRow) {this.updatePlayerRow.set(updatePlayerRow + "");}
+    public String getUpdatePlayerCol() {return updatePlayerCol.get();}
+    public void setUpdatePlayerCol(int updatePlayerCol) {this.updatePlayerCol.set(updatePlayerCol + "");}
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
         music();
-        width = mazeDisplayer.getScaleX();
-        height=mazeDisplayer.getScaleY();
-
-
     }
-    public void setViewModel(MyViewModel vm)
-    {
-        ViewModel = vm;
-    }
+    public void setViewModel(MyViewModel vm) {ViewModel = vm;}
 
     public void playerMove(KeyEvent ke) {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
         ViewModel.playerMove(ke.getCode());
-        ke.consume();
-    }
+        ke.consume();}
 
     public void setPlayerPosition(int row, int col){
         if (mazeDisplayer.setPlayerPosition(row, col) == 0) {
@@ -149,39 +121,30 @@ public class MyViewController implements IView, Observer {
             ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()) , Integer.parseInt(Col_textBox.getText()) );
             maze = ViewModel.getMaze();
             mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
-
-
         }
     }
+
     public void setOnScroll(ScrollEvent scroll) {
         if (scroll.isControlDown()) {
             double zoom_fac = 1.05;
             if (scroll.getDeltaY() < 0) {
-                zoom_fac = 2.0 - zoom_fac;
-            }
+                zoom_fac = 2.0 - zoom_fac;}
             Scale newScale = new Scale();
             newScale.setPivotX(scroll.getX());
             newScale.setPivotY(scroll.getY());
             newScale.setX(mazeDisplayer.getScaleX() * zoom_fac);
             newScale.setY(mazeDisplayer.getScaleY() * zoom_fac);
             mazeDisplayer.getTransforms().add(newScale);
-
             scroll.consume();
         }
     }
+
+
     public void set_Resize(Scene scene){
-        mazeDisplayer.widthProperty().bind(MazePane.widthProperty());
-        mazeDisplayer.heightProperty().bind(MazePane.heightProperty());
         scene.widthProperty().addListener((observable, oldValue, newValue) -> {
-            mazeDisplayer.widthProperty().bind(MazePane.widthProperty());
-        });
+            mazeDisplayer.widthProperty().bind(MazePane.widthProperty());});
         scene.heightProperty().addListener((observable, oldValue, newValue) -> {
-            mazeDisplayer.heightProperty().bind(MazePane.heightProperty());
-        });
-        width = mazeDisplayer.getScaleX();
-        height=mazeDisplayer.getScaleY();
-
-
+            mazeDisplayer.heightProperty().bind(MazePane.heightProperty());});
     }
 
     @Override
@@ -189,13 +152,13 @@ public class MyViewController implements IView, Observer {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
     }
-    public void MazeDisplayMouseClicked(MouseEvent mouseEvent) {
-        mazeDisplayer.requestFocus();
-    }
+
+    public void MazeDisplayMouseClicked(MouseEvent mouseEvent) {mazeDisplayer.requestFocus();}
     public void sovleMazeButton(){
         ViewModel.solveMaze();
-        mazeDisplayer.requestFocus();
-    }
+        mazeDisplayer.requestFocus();}
+
+
     @Override
     public void update(Observable o, Object arg) {
         if (o== ViewModel)
@@ -210,7 +173,6 @@ public class MyViewController implements IView, Observer {
                 mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
                 mazeDisplayer.requestFocus();
             }
-            //todo maybe save solution here also
             if (arg.equals("solved"))
             {
                 mazeDisplayer.drawSol(ViewModel.getSolution());
@@ -235,7 +197,7 @@ public class MyViewController implements IView, Observer {
                 mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
                 mazeDisplayer.requestFocus();
                 alertInfo = new Alert(Alert.AlertType.CONFIRMATION);
-                alertInfo.setHeaderText("Laod");
+                alertInfo.setHeaderText("Load");
                 alertInfo.setContentText("Load was successful");
                 alertInfo.showAndWait();
             }
@@ -251,22 +213,22 @@ public class MyViewController implements IView, Observer {
     public void mouseDragged(MouseEvent mouseEvent) {
         if(ViewModel.getMaze() != null) {
             int maximumSize = Math.max(ViewModel.getMaze()[0].length, ViewModel.getMaze().length);
-            double mousePosX=helperMouseDragged(maximumSize,mazeDisplayer.getHeight(),
+            double mouse_x= wrapDrag(maximumSize,mazeDisplayer.getHeight(),
                     ViewModel.getMaze().length,mouseEvent.getX(),mazeDisplayer.getWidth() / maximumSize);
-            double mousePosY=helperMouseDragged(maximumSize,mazeDisplayer.getWidth(),
+            double mouse_y= wrapDrag(maximumSize,mazeDisplayer.getWidth(),
                     ViewModel.getMaze()[0].length,mouseEvent.getY(),mazeDisplayer.getHeight() / maximumSize);
-            if ( mousePosX == ViewModel.getPlayerCol() && mousePosY < ViewModel.getPlayerRow() )
+            if ( mouse_x == ViewModel.getPlayerCol() && mouse_y < ViewModel.getPlayerRow() )
                 ViewModel.playerMove(KeyCode.NUMPAD8);
-            else if (mousePosY == ViewModel.getPlayerRow() && mousePosX > ViewModel.getPlayerCol() )
+            else if (mouse_y == ViewModel.getPlayerRow() && mouse_x > ViewModel.getPlayerCol() )
                 ViewModel.playerMove(KeyCode.NUMPAD6);
-            else if ( mousePosY == ViewModel.getPlayerRow() && mousePosX < ViewModel.getPlayerCol() )
+            else if ( mouse_y == ViewModel.getPlayerRow() && mouse_x < ViewModel.getPlayerCol() )
                 ViewModel.playerMove(KeyCode.NUMPAD4);
-            else if (mousePosX == ViewModel.getPlayerCol() && mousePosY > ViewModel.getPlayerRow()  )
+            else if (mouse_x == ViewModel.getPlayerCol() && mouse_y > ViewModel.getPlayerRow()  )
                 ViewModel.playerMove(KeyCode.NUMPAD2);
 
         }
     }
-    private  double helperMouseDragged(int maxsize, double canvasSize, int mazeSize,double mouseEvent,double temp){
+    private  double wrapDrag(int maxsize, double canvasSize, int mazeSize, double mouseEvent, double temp){
         double cellSize=canvasSize/maxsize;
         double start = (canvasSize / 2 - (cellSize * mazeSize / 2)) / cellSize;
         double mouse = (int) ((mouseEvent) / (temp) - start);
@@ -279,30 +241,23 @@ public class MyViewController implements IView, Observer {
             mediaPlayer = new MediaPlayer(h);
             mediaPlayer.setOnEndOfMedia(new Runnable() {
                 public void run() {
-                    mediaPlayer.seek(Duration.ZERO);
-                }
-            });
+                    mediaPlayer.seek(Duration.ZERO);}});
             mediaPlayer.play();
-            mediaPlayer.setVolume(0.02);
-        }
-
+            mediaPlayer.setVolume(0.02);}
     }
-    Boolean isMuted = false;
+
     public void muteMusic(ActionEvent actionEvent) {
         if (isMuted == false) {
             mediaPlayer.stop();
             MuteButton.setStyle("-fx-background-color: linear-gradient(#12e136, #50e58d)");
-            isMuted=true;
-        }
+            isMuted=true;}
         else {
             mediaPlayer.play();
             MuteButton.setStyle("-fx-background-color: linear-gradient(#7cafc2,#86c1b9)");
-            isMuted=false;
-        }
+            isMuted=false;}
         mazeDisplayer.requestFocus();
-
     }
-    Alert alertInfo;
+
 
     public void Help_button_func() {
 
@@ -329,7 +284,7 @@ public class MyViewController implements IView, Observer {
         this.stage.close();
         ViewModel.stopServers();
     }
-    Alert alertAbout;
+
     public void AboutButton_func(ActionEvent actionEvent) {
         alertAbout = new Alert(Alert.AlertType.INFORMATION);
         alertAbout.setHeaderText("About:");
@@ -365,10 +320,7 @@ public class MyViewController implements IView, Observer {
         mazeDisplayer.requestFocus();
     }
 
-    public void setStage(Stage s)
-    {
-        this.stage = s;
-    }
+    public void setStage(Stage s) {this.stage = s;}
 
     public void Load(ActionEvent actionEvent) {
         FileChooser fs = new FileChooser();
@@ -382,7 +334,7 @@ public class MyViewController implements IView, Observer {
         Alert al = new Alert(Alert.AlertType.INFORMATION);
         al.setContentText("Properties");
         al.setContentText(String.valueOf("Number of threads: " + ViewModel.getThreads())+ "\n"+ "Generating Algorithm: " + ViewModel.getGenerate() + "\n" + "Searching Algortihm: " + ViewModel.getSearch());
-
+        al.setHeaderText("Propereties");
         al.showAndWait();
     }
 }

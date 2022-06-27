@@ -15,18 +15,13 @@ public interface IModel {
     void playerMove(KeyCode direction);
     public int getPlayerRow();
     public int getPlayerCol();
-
     public ArrayList<Point2D> getSolution();
-
     public int getStart_row();
     public int getStart_col();
     public int getEnd_row();
     public int getEnd_col();
-
     public void save(File my_file);
-
     public void Load(File my_file);
-
     public void stopServers();
     public int getThreads();
     public String getGenerating();

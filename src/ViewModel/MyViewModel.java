@@ -2,20 +2,14 @@ package ViewModel;
 
 import Model.IModel;
 import Model.MyModel;
-
-//import algorithms.mazeGenerators.Maze;
-//import algorithms.search.Solution;
 import javafx.scene.control.Alert;
-
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
 import static javafx.scene.input.KeyCode.NUMPAD1;
 import static javafx.scene.input.KeyCode.NUMPAD2;
 
@@ -64,8 +58,6 @@ public class MyViewModel extends Observable implements Observer {
 
     public ArrayList<javafx.geometry.Point2D> getSolution() {
         return model.getSolution();
-
-
     }
 
     @Override
@@ -123,59 +115,37 @@ public class MyViewModel extends Observable implements Observer {
                 setChanged();
                 notifyObservers("not loaded");
             }
-
         }
-
     }
 
     public void generateMaze(int row, int col) {
-        if (row < 0 || col < 0)
-        {
+        if (row < 0 || col < 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("problem with rows or columns");
             alert.show();
         }
         else {
-            model.generateMaze(row, col);
-        }
+            model.generateMaze(row, col);}
     }
 
 
-    public int[][] getMaze() {
-        return maze;
-    }
+    public int[][] getMaze() {return maze;}
 
-    public int getPlayerRow() {
-        return playerRow;
-    }
+    public int getPlayerRow() {return playerRow;}
 
-    public int getPlayerCol() {
-        return playerCol;
-    }
+    public int getPlayerCol() {return playerCol;}
 
-    public void playerMove(KeyCode direction) {
+    public void playerMove(KeyCode direction) {model.playerMove(direction);}
 
-        model.playerMove(direction);
+    public void solveMaze() {model.solveMaze();}
 
-
-        }
-
-    public void solveMaze() {
-         model.solveMaze();
-    }
-
-    public void save(File my_file) {
-        model.save(my_file);
-
-    }
+    public void save(File my_file) {model.save(my_file);}
 
     public void Load(File my_file) {
         model.Load(my_file);
     }
 
-    public void stopServers() {
-        model.stopServers();
-    }
+    public void stopServers() {model.stopServers();}
 
     public int getThreads() {
         return model.getThreads();

@@ -99,12 +99,12 @@
                             <items>
                                 <MenuItem fx:id="newMazeButton" mnemonicParsing="false" onAction="#new_maze" text="New" />
                         <MenuItem fx:id="save_button" mnemonicParsing="false" onAction="#Save" text="Save" />
-                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" />
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" onAction="#Load"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                             <items>
-                                <MenuItem fx:id="prop_button" mnemonicParsing="false" text="Properties" />
+                                <MenuItem fx:id="prop_button" mnemonicParsing="false" text="Properties" onAction="#showProp" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Exit">
