@@ -176,5 +176,17 @@ public class MyViewModel extends Observable implements Observer {
     public void stopServers() {
         model.stopServers();
     }
+
+    public int getThreads() {
+        return model.getThreads();
+    }
+
+    public String getGenerate() {
+        return model.getGenerating();
+    }
+
+    public String getSearch() {
+        return model.getSearching();
+    }
 }
 

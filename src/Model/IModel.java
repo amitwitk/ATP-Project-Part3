@@ -28,4 +28,7 @@ public interface IModel {
     public void Load(File my_file);
 
     public void stopServers();
+    public int getThreads();
+    public String getGenerating();
+    public  String getSearching();
 }

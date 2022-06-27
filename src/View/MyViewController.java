@@ -26,10 +26,12 @@ import javafx.util.Duration;
 
 
 import java.io.File;
+import java.lang.module.Configuration;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MyViewController implements IView, Observer {
@@ -345,5 +347,13 @@ public class MyViewController implements IView, Observer {
         File my_file = fs.showOpenDialog(stage);
         ViewModel.Load(my_file);
         mazeDisplayer.requestFocus();
+    }
+
+    public void showProp(ActionEvent actionEvent) {
+        Alert al = new Alert(Alert.AlertType.INFORMATION);
+        al.setContentText("Properties");
+        al.setContentText(String.valueOf("Number of threads: " + ViewModel.getThreads())+ "\n"+ "Generating Algorithm: " + ViewModel.getGenerate() + "\n" + "Searching Algortihm: " + ViewModel.getSearch());
+
+        al.showAndWait();
     }
 }

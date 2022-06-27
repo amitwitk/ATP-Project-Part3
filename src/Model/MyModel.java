@@ -3,7 +3,7 @@ package Model;
 
 import Client.Client;
 import Client.IClientStrategy;
-
+import Server.Configurations;
 import IO.MyDecompressorInputStream;
 import Server.*;
 import algorithms.mazeGenerators.*;
@@ -414,6 +414,22 @@ public class MyModel extends Observable implements IModel  {
         {
 
         }
+    }
+    Configurations co = Configurations.getInstance();
+    public int getThreads()
+    {
+
+        return Integer.parseInt(co.getProp("threadPoolSize"));
+    }
+
+    public String getGenerating()
+    {
+        return co.getProp("mazeGeneratingAlgorithm");
+    }
+
+    public  String getSearching()
+    {
+        return co.getProp("mazeSearchingAlgorithm");
     }
 
 
