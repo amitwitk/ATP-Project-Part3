@@ -80,6 +80,8 @@ public class MyViewController implements IView, Observer {
         mymodel.addObserver(ViewModel);
         Pstage.setScene(scene);
         Pstage.show();
+        //MuteButton.setDisable(true);
+
     }
 
     public void new_maze(){generateMazeButton();}
@@ -151,6 +153,7 @@ public class MyViewController implements IView, Observer {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
+
     }
 
     public void MazeDisplayMouseClicked(MouseEvent mouseEvent) {mazeDisplayer.requestFocus();}
@@ -211,20 +214,18 @@ public class MyViewController implements IView, Observer {
         }
     }
     public void mouseDragged(MouseEvent mouseEvent) {
-        if(ViewModel.getMaze() != null) {
-            int maximumSize = Math.max(ViewModel.getMaze()[0].length, ViewModel.getMaze().length);
-            double mouse_x= wrapDrag(maximumSize,mazeDisplayer.getHeight(),
-                    ViewModel.getMaze().length,mouseEvent.getX(),mazeDisplayer.getWidth() / maximumSize);
-            double mouse_y= wrapDrag(maximumSize,mazeDisplayer.getWidth(),
-                    ViewModel.getMaze()[0].length,mouseEvent.getY(),mazeDisplayer.getHeight() / maximumSize);
-            if ( mouse_x == ViewModel.getPlayerCol() && mouse_y < ViewModel.getPlayerRow() )
-                ViewModel.playerMove(KeyCode.NUMPAD8);
-            else if (mouse_y == ViewModel.getPlayerRow() && mouse_x > ViewModel.getPlayerCol() )
-                ViewModel.playerMove(KeyCode.NUMPAD6);
-            else if ( mouse_y == ViewModel.getPlayerRow() && mouse_x < ViewModel.getPlayerCol() )
-                ViewModel.playerMove(KeyCode.NUMPAD4);
-            else if (mouse_x == ViewModel.getPlayerCol() && mouse_y > ViewModel.getPlayerRow()  )
-                ViewModel.playerMove(KeyCode.NUMPAD2);
+        if(maze != null) {
+            int max_size = Math.max(maze[0].length, maze.length);
+            double mouse_x= wrapDrag(max_size,mazeDisplayer.getHeight(), maze.length,mouseEvent.getX(),mazeDisplayer.getWidth() / max_size);
+            double mouse_y= wrapDrag(max_size,mazeDisplayer.getWidth(), maze[0].length,mouseEvent.getY(),mazeDisplayer.getHeight() / max_size);
+            if ( mouse_x == ViewModel.getPlayerCol() && mouse_y < ViewModel.getPlayerRow() ) {
+                ViewModel.playerMove(KeyCode.NUMPAD8);}
+            else if (mouse_y == ViewModel.getPlayerRow() && mouse_x > ViewModel.getPlayerCol() ) {
+                ViewModel.playerMove(KeyCode.NUMPAD6);}
+            else if ( mouse_y == ViewModel.getPlayerRow() && mouse_x < ViewModel.getPlayerCol() ) {
+                ViewModel.playerMove(KeyCode.NUMPAD4);}
+            else if (mouse_x == ViewModel.getPlayerCol() && mouse_y > ViewModel.getPlayerRow()  ) {
+                ViewModel.playerMove(KeyCode.NUMPAD2);}
 
         }
     }
@@ -243,7 +244,8 @@ public class MyViewController implements IView, Observer {
                 public void run() {
                     mediaPlayer.seek(Duration.ZERO);}});
             mediaPlayer.play();
-            mediaPlayer.setVolume(0.02);}
+            mediaPlayer.setVolume(0.02);
+            MuteButton.setDisable(false);}
     }
 
     public void muteMusic(ActionEvent actionEvent) {
