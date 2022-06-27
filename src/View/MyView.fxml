@@ -47,8 +47,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import View.MazeDisplay?>
 
+<?import View.MazeDisplay?>
 <BorderPane fx:id="myBorderPane" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="137.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
@@ -98,8 +98,8 @@
                         <Menu mnemonicParsing="false" text="File">
                             <items>
                                 <MenuItem fx:id="newMazeButton" mnemonicParsing="false" onAction="#new_maze" text="New" />
-                        <MenuItem fx:id="save_button" mnemonicParsing="false" text="Save" onAction="#Save"/>
-                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" onAction="#Load"/>
+                        <MenuItem fx:id="save_button" mnemonicParsing="false" onAction="#Save" text="Save" />
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" onAction="#Load" text="Load" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
@@ -107,7 +107,10 @@
                                 <MenuItem mnemonicParsing="false" text="Properties" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Exit" />
+                        <Menu mnemonicParsing="false" text="Exit">
+                     <items>
+                        <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitButtonFunc" text="Exit" />
+                     </items></Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
                         <MenuItem fx:id="Help_button" mnemonicParsing="false" onAction="#Help_button_func" text="Help" />

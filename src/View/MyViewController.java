@@ -93,40 +93,6 @@ public class MyViewController implements IView, Observer {
     public void playerMove(KeyEvent ke) {
         int row = mazeDisplayer.getPlayerRow();
         int col = mazeDisplayer.getPlayerCol();
-//        int direction =0;
-//        switch (ke.getCode()) {
-//            case NUMPAD1:
-//                direction = 1;
-//                break;
-//            case DOWN:
-//            case NUMPAD2:
-//                direction = 2;
-//                break;
-//            case NUMPAD3:
-//                direction = 3;
-//                break;
-//            case LEFT:
-//            case NUMPAD4:
-//                direction = 4;
-//                break;
-//            case NUMPAD5:
-//                direction = 5;
-//                break;
-//            case RIGHT:
-//            case NUMPAD6:
-//                direction = 6;
-//                break;
-//            case NUMPAD7:
-//                direction = 7;
-//                break;
-//            case UP:
-//            case NUMPAD8:
-//                direction = 8;
-//                break;
-//            case NUMPAD9:
-//                direction = 9;
-//                break;
-//        }
         ViewModel.playerMove(ke.getCode());
         ke.consume();
     }
@@ -197,6 +163,7 @@ public class MyViewController implements IView, Observer {
     }
     public void sovleMazeButton(){
         ViewModel.solveMaze();
+        mazeDisplayer.requestFocus();
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -301,6 +268,7 @@ public class MyViewController implements IView, Observer {
             MuteButton.setStyle("-fx-background-color: linear-gradient(#7cafc2,#86c1b9)");
             isMuted=false;
         }
+        mazeDisplayer.requestFocus();
 
     }
     Alert alertInfo;
@@ -324,6 +292,10 @@ public class MyViewController implements IView, Observer {
         dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
         dialog.getStyleClass().add("dialog");
         alertInfo.showAndWait();
+        mazeDisplayer.requestFocus();
+    }
+    public void exitButtonFunc(){
+        this.stage.close();
     }
     Alert alertAbout;
     public void AboutButton_func(ActionEvent actionEvent) {
@@ -350,6 +322,7 @@ public class MyViewController implements IView, Observer {
         dialog.getStylesheets().add(getClass().getResource("MainStyle.css").toString());
         dialog.getStyleClass().add("dialog");
         alertAbout.showAndWait();
+        mazeDisplayer.requestFocus();
     }
 
     public void Save(ActionEvent actionEvent) {
@@ -357,6 +330,7 @@ public class MyViewController implements IView, Observer {
         fs.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze",".maze"));
         File my_file = fs.showSaveDialog(stage);
         ViewModel.save(my_file);
+        mazeDisplayer.requestFocus();
     }
 
     public void setStage(Stage s)
@@ -369,5 +343,6 @@ public class MyViewController implements IView, Observer {
         fs.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze",".maze"));
         File my_file = fs.showOpenDialog(stage);
         ViewModel.Load(my_file);
+        mazeDisplayer.requestFocus();
     }
 }

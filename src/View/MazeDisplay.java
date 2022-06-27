@@ -186,13 +186,13 @@ public class MazeDisplay extends Canvas {
                     if (j == Goal_Col&& i== Goal_Row){
                         double x = j * cellWidth;
                         double y = i * cellHeight;
-                        graphicsContext.setFill(Color.BLACK);
+                        graphicsContext.setFill(Color.LIGHTGREEN);
                         graphicsContext.fillRect(x, y, cellWidth, cellHeight);
                     }
                     else {
                         double x = j * cellWidth;
                         double y = i * cellHeight;
-                            graphicsContext.setFill(Color.HONEYDEW);
+                            graphicsContext.setFill(Color.BLACK);
                             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
 
                     }
