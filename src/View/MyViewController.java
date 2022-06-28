@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -40,7 +41,6 @@ public class MyViewController implements IView, Observer {
     public Label playerRow;
     public Label playerCol;
     public MyViewModel ViewModel;
-    public ComboBox<String> ChooseAvatarBox;
 
     private String[] avatars={"Icy Tower", "sonicX"};
     private int[][] maze;
@@ -63,6 +63,13 @@ public class MyViewController implements IView, Observer {
     Scene scene;
     Parent root;
     Stage Pstage;
+    @FXML
+    AnchorPane ScenePane;
+    @FXML
+    Pane AvatarPane;
+
+    @FXML
+    AvatarScene AvatarDisplayer;
 
     public void Switch_to_scene2(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
@@ -83,6 +90,25 @@ public class MyViewController implements IView, Observer {
         //MuteButton.setDisable(true);
 
     }
+
+    public void ChooseAvatarButton(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChooseStage.fxml"));
+        Parent root = fxmlLoader.load();
+        Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root,400,300);
+        IModel model = new MyModel();
+        try {
+            scene.getStylesheets().add(getClass().getResource("MainStyle.css").toExternalForm());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        Pstage.setScene(scene);
+        Pstage.show();
+        AvatarDisplayer.draw();
+        //myBorderPane.setCenter(GlyphsDude.createIcon(FontAwesomeIconName.ARROW_RIGHT));
+    }
+
 
     public void new_maze(){generateMazeButton();}
 
@@ -148,6 +174,8 @@ public class MyViewController implements IView, Observer {
         scene.heightProperty().addListener((observable, oldValue, newValue) -> {
             mazeDisplayer.heightProperty().bind(MazePane.heightProperty());});
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -339,4 +367,6 @@ public class MyViewController implements IView, Observer {
         al.setHeaderText("Propereties");
         al.showAndWait();
     }
+
+
 }

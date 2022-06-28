@@ -34,7 +34,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -53,10 +52,10 @@
     <left>
         <VBox prefHeight="137.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
-                <GridPane prefWidth="169.0">
+                <GridPane>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="92.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.199951171875" minWidth="0.0" prefWidth="76.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="92.79997558593749" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.199951171875" minWidth="0.0" prefWidth="76.0000244140625" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,7 +70,7 @@
                     <TextField fx:id="Col_textBox" text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Button onAction="#generateMazeButton" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                     <Button fx:id="SolveMazeButton" cancelButton="true" onAction="#sovleMazeButton" prefHeight="26.0" prefWidth="172.0" text="Hint" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-               <ComboBox fx:id="ChooseAvatarBox" prefHeight="26.0" prefWidth="165.0" promptText="Choose your avatar" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+               <Button fx:id="ChooseAvatarButton" mnemonicParsing="false" onAction="#ChooseAvatarButton" prefHeight="30.0" prefWidth="182.0" text="Choose avatar" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                <padding>
                   <Insets bottom="10.0" />
                </padding>
@@ -99,17 +98,17 @@
                             <items>
                                 <MenuItem fx:id="newMazeButton" mnemonicParsing="false" onAction="#new_maze" text="New" />
                         <MenuItem fx:id="save_button" mnemonicParsing="false" onAction="#Save" text="Save" />
-                        <MenuItem fx:id="load_button" mnemonicParsing="false" text="Load" onAction="#Load"/>
+                        <MenuItem fx:id="load_button" mnemonicParsing="false" onAction="#Load" text="Load" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                             <items>
-                                <MenuItem fx:id="prop_button" mnemonicParsing="false" text="Properties" onAction="#showProp" />
+                                <MenuItem fx:id="prop_button" mnemonicParsing="false" onAction="#showProp" text="Properties" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Exit">
                      <items>
-                        <MenuItem fx:id="exit_button" mnemonicParsing="false" text="Exit" onAction="#exitButtonFunc"/>
+                        <MenuItem fx:id="exit_button" mnemonicParsing="false" onAction="#exitButtonFunc" text="Exit" />
                      </items></Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
