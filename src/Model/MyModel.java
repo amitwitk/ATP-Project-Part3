@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
 
-public class MyModel extends Observable implements Model.IModel {
+public class MyModel extends Observable implements IModel {
     public MyMazeGenerator generator;
     private Maze maze;
     private Solution solution;

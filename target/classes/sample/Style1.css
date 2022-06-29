@@ -5,12 +5,12 @@
     -fx-text-fill: #ffffff;
 }
 Button{
-    -fx-background-color: linear-gradient(#7cafc2,#86c1b9);
-    -fx-text-fill: #000000;
+    -fx-background-color: linear-gradient(#ccc8c8, #fdf5f5);
+    -fx-text-fill: #111111;
 }
 
 Button:hover{
-    -fx-background-color: linear-gradient(#12e136, #50e58d);
+    -fx-background-color: linear-gradient(#6ef67b, #d6e550);
     -fx-text-fill: #000000;
 }
 .dialog{

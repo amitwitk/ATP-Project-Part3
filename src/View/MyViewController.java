@@ -52,7 +52,6 @@ public class MyViewController implements IView, Observer {
     public Label playerCol;
     public MyViewModel ViewModel;
 
-    private String[] avatars={"Icy Tower", "sonicX"};
     private int[][] maze;
     public MazeDisplay mazeDisplayer;
     public BorderPane myBorderPane;
@@ -61,6 +60,7 @@ public class MyViewController implements IView, Observer {
     Alert alertAbout;
     private DialogPane dialog;
     MediaPlayer mediaPlayer;
+    MediaPlayer winMedia;
     Boolean isMuted = false;
 
     public MenuItem new_button;
@@ -79,9 +79,9 @@ public class MyViewController implements IView, Observer {
     Pane AvatarPane;
 
     @FXML
-    AvatarScene AvatarDisplayer;
-    @FXML
     ImageView myImageView;
+
+
 
 //    Image myImage = new Image(getClass().getResourceAsStream("resources/images/sonic.jpg"));
 
@@ -106,6 +106,9 @@ public class MyViewController implements IView, Observer {
     }
 
     public void ChooseAvatarButton(ActionEvent event) throws IOException {
+        if (mediaPlayer!= null){
+            mediaPlayer.stop();
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChooseStage.fxml"));
         Parent root = fxmlLoader.load();
         Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -116,11 +119,29 @@ public class MyViewController implements IView, Observer {
         catch (Exception e){
             e.printStackTrace();
         }
+        MazeDisplay.avatar =0;
         Pstage.setScene(scene);
-        myImageView = new ImageView();
         Pstage.show();
 
     }
+    public void changeRight(ActionEvent event) {
+        if (MazeDisplay.avatar < MazeDisplay.avatars.length-1) {
+            MazeDisplay.avatar++;
+            myImageView.setImage(new Image(MazeDisplay.avatars[MazeDisplay.avatar]));
+        }
+
+
+    }
+    public void changeLeft(ActionEvent event) {
+        if (MazeDisplay.avatar > 0) {
+            MazeDisplay.avatar--;
+            myImageView.setImage(new Image(MazeDisplay.avatars[MazeDisplay.avatar]));
+        }
+
+
+    }
+
+
 
 
     public void new_maze(){generateMazeButton();}
@@ -147,6 +168,13 @@ public class MyViewController implements IView, Observer {
             setUpdatePlayerCol(col);
         }
         else{
+            mediaPlayer.stop();
+            if (winMedia== null){
+                win_music();
+            }
+            else {
+                winMedia.play();
+            }
             Alert alert = new Alert(Alert.AlertType.INFORMATION,"Congratulations! You succesfully solved the maze!",ButtonType.YES);
             alert.setHeaderText("Congratulations! You succesfully solved the maze!");
             alert.setContentText("To progress to the next level, press YES");
@@ -162,6 +190,9 @@ public class MyViewController implements IView, Observer {
             ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()) , Integer.parseInt(Col_textBox.getText()) );
             maze = ViewModel.getMaze();
             mazeDisplayer.drawMaze(maze, ViewModel.getStart_row(), ViewModel.getStart_col(), ViewModel.getEnd_row(), ViewModel.getEnd_col());
+            winMedia.stop();
+            mediaPlayer.play();
+
         }
     }
 
@@ -285,8 +316,17 @@ public class MyViewController implements IView, Observer {
                 public void run() {
                     mediaPlayer.seek(Duration.ZERO);}});
             mediaPlayer.play();
-            mediaPlayer.setVolume(0.02);
+            mediaPlayer.setVolume(0.05);
             MuteButton.setDisable(false);}
+    }
+    public void win_music() {
+        if (winMedia==null){
+            String s = "resources/clips/YXFBY9J-win.mp3";
+            Media h = new Media(Paths.get(s).toUri().toString());
+            winMedia = new MediaPlayer(h);
+            winMedia.play();
+            winMedia.setVolume(0.1);
+            }
     }
 
     public void muteMusic(ActionEvent actionEvent) {
@@ -380,6 +420,7 @@ public class MyViewController implements IView, Observer {
         al.setHeaderText("Propereties");
         al.showAndWait();
     }
+
 
 
 }

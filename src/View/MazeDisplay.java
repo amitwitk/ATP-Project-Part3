@@ -20,6 +20,8 @@ import javafx.scene.image.Image;
 public class MazeDisplay extends Canvas {
     private int[][] maze;
     //Solution solution;
+    static public int avatar;
+    static public String[] avatars = {"images/IcyTower.PNG","images/sonic.jpg", "images/bugs bunny.jpg","images/sponge.png"};
     private int row_index =0;
     private int col_index =0;
     private int Goal_Row;
@@ -120,6 +122,8 @@ public class MazeDisplay extends Canvas {
         this.col_index=start_col;
         this.Goal_Col= end_col;
         this.Goal_Row=end_row;
+        this.avatar = avatar;
+        this.avatars = avatars;
         draw();
     }
 
@@ -185,11 +189,9 @@ public class MazeDisplay extends Canvas {
         double y = getPlayerRow() * cellHeight;
         graphicsContext.setFill(Color.RED);
         Image playerImage = null;
-        try {
-            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no player image file");
-        }
+
+        playerImage = new Image(avatars[avatar]);
+
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else

@@ -20,14 +20,14 @@
             </Label>
          </top>
          <right>
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="29.0" BorderPane.alignment="CENTER">
+            <Button fx:id="change_right" mnemonicParsing="false" onAction="#changeRight" prefHeight="33.0" prefWidth="29.0" BorderPane.alignment="CENTER">
                <graphic>
                   <FontAwesomeIcon iconName="ARROW_RIGHT" />
                </graphic>
             </Button>
          </right>
          <left>
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="29.0" BorderPane.alignment="CENTER">
+            <Button fx:id="ChangeLeft" mnemonicParsing="false" onAction="#changeLeft" prefHeight="33.0" prefWidth="29.0" BorderPane.alignment="CENTER">
                <graphic>
                   <FontAwesomeIcon iconName="ARROW_LEFT" />
                </graphic>
@@ -36,9 +36,10 @@
          <center>
             <ImageView fx:id="myImageView" fitHeight="150.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../resources/images/IcyTower.PNG" />
+                  <Image url="/images/IcyTower.PNG" />
                </image></ImageView>
          </center>
       </BorderPane>
+      <Button layoutX="284.0" layoutY="184.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="51.0" text="GO!" onAction="#Switch_to_scene2" />
    </children>
 </AnchorPane>
