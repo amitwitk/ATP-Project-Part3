@@ -23,8 +23,6 @@ import java.nio.file.Paths;
 import java.util.Observer;
 
 public class Main extends Application {
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
 

@@ -16,9 +16,13 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 
-public class MyModel extends Observable implements IModel  {
+public class MyModel extends Observable implements Model.IModel {
     public MyMazeGenerator generator;
     private Maze maze;
     private Solution solution;
@@ -32,6 +36,8 @@ public class MyModel extends Observable implements IModel  {
     ISearchingAlgorithm solver;
     private Server maze_generate_server;
     private Server maze_solver_server;
+    private static final Logger LOG = LogManager.getLogger();
+
 
     Configurations co = Configurations.getInstance();
 
@@ -57,7 +63,7 @@ public class MyModel extends Observable implements IModel  {
             notifyObservers("solved");
         }
     }
-
+    //LOG.info(str);
 
     //from part 2
     private void CommunicateWithServer_SolveSearchProblem(Maze maze) {
@@ -76,12 +82,16 @@ public class MyModel extends Observable implements IModel  {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                 }
             });
             client.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        String str = "hi tal is gay";
+        LOG.info(str);
+
     }
 
     private void updateSolution(Solution mazeSolution) {

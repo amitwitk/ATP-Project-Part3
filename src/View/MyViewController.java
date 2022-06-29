@@ -2,6 +2,7 @@ package View;
 import Model.IModel;
 import Model.MyModel;
 import ViewModel.MyViewModel;
+import com.sun.javafx.iio.ImageStorageException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -11,6 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +31,9 @@ import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.image.Image;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -70,6 +80,10 @@ public class MyViewController implements IView, Observer {
 
     @FXML
     AvatarScene AvatarDisplayer;
+    @FXML
+    ImageView myImageView;
+
+//    Image myImage = new Image(getClass().getResourceAsStream("resources/images/sonic.jpg"));
 
     public void Switch_to_scene2(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
@@ -96,7 +110,6 @@ public class MyViewController implements IView, Observer {
         Parent root = fxmlLoader.load();
         Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root,400,300);
-        IModel model = new MyModel();
         try {
             scene.getStylesheets().add(getClass().getResource("MainStyle.css").toExternalForm());
         }
@@ -104,9 +117,9 @@ public class MyViewController implements IView, Observer {
             e.printStackTrace();
         }
         Pstage.setScene(scene);
+        myImageView = new ImageView();
         Pstage.show();
-        AvatarDisplayer.draw();
-        //myBorderPane.setCenter(GlyphsDude.createIcon(FontAwesomeIconName.ARROW_RIGHT));
+
     }
 
 

@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<?import View.AvatarScene?>
 <AnchorPane fx:id="ScenePane" prefHeight="340.0" prefWidth="438.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
       <BorderPane layoutX="67.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0">
          <top>
-            <Label prefHeight="66.0" prefWidth="317.0" text="Choose the avatar you would like to play with!" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+            <Label prefHeight="72.0" prefWidth="200.0" text="Choose the avatar you would like to play with!" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Arial Italic" size="20.0" />
                </font>
             </Label>
          </top>
-         <center>
-            <Pane fx:id="AvatarPane" prefHeight="148.0" prefWidth="175.0" BorderPane.alignment="CENTER">
-               <children>
-                  <AvatarScene fx:id="AvatarDisplayer" width="175" height="148"/>
-               </children>
-            </Pane>
-         </center>
          <right>
             <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="29.0" BorderPane.alignment="CENTER">
                <graphic>
@@ -41,6 +33,12 @@
                </graphic>
             </Button>
          </left>
+         <center>
+            <ImageView fx:id="myImageView" fitHeight="150.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../resources/images/IcyTower.PNG" />
+               </image></ImageView>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
