@@ -22,9 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Scale;
@@ -76,7 +74,14 @@ public class MyViewController implements IView, Observer {
     @FXML
     AnchorPane ScenePane;
     @FXML
-    Pane AvatarPane;
+    BorderPane ChoosePane;
+
+    @FXML
+    public ImageView MyImage;
+    @FXML
+    public VBox HeadStagePane;
+    @FXML
+    BorderPane headPane;
 
     @FXML
     ImageView myImageView;
@@ -137,6 +142,12 @@ public class MyViewController implements IView, Observer {
             MazeDisplay.avatar--;
             myImageView.setImage(new Image(MazeDisplay.avatars[MazeDisplay.avatar]));
         }
+
+
+    }
+    public void set_head_scene(Scene scene){
+        MyImage.fitHeightProperty().bind(HeadStagePane.heightProperty());
+        MyImage.fitWidthProperty().bind(HeadStagePane.widthProperty());
 
 
     }
@@ -218,6 +229,7 @@ public class MyViewController implements IView, Observer {
         scene.heightProperty().addListener((observable, oldValue, newValue) -> {
             mazeDisplayer.heightProperty().bind(MazePane.heightProperty());});
     }
+
 
 
 

@@ -6,38 +6,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<VBox fx:id="HeadStagePane" prefHeight="388.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <children>
-      <ImageView fitHeight="402.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="/images/bc0ger.jpg" />
-         </image>
-      </ImageView>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-            <Pane prefHeight="400.0" prefWidth="555.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="203.0" prefWidth="120.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="126.0" layoutY="90.0" prefHeight="220.0" prefWidth="141.0">
+                  <ImageView fx:id="MyImage" fitHeight="402.0" fitWidth="602.0" layoutX="-166.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="images/bc0ger.jpg" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="52.0" layoutY="26.0" prefHeight="55.0" prefWidth="362.0" style="-fx-background-color: green;">
                      <children>
-                        <Button fx:id="StartB" graphicTextGap="0.0" mnemonicParsing="false" onAction="#Switch_to_scene2" prefHeight="71.0" prefWidth="138.0" text="Start a game!" />
-                     </children>
-                  </VBox>
-                  <Pane layoutX="10.0" layoutY="5.0" prefHeight="55.0" prefWidth="362.0" style="-fx-background-color: green;">
-                     <children>
-                        <Label layoutX="14.0" layoutY="-3.0" prefHeight="61.0" prefWidth="344.0" text="The (a)maze(ing) game" textFill="#d8dfd8" underline="true">
+                        <Label layoutX="35.0" layoutY="3.0" prefHeight="49.0" prefWidth="292.0" text="The (a)maze(ing) game" textFill="#d8dfd8" underline="true">
                            <font>
-                              <Font name="Baskerville Old Face" size="36.0" />
+                              <Font name="Baskerville Old Face" size="28.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
+                  <Button fx:id="StartB" graphicTextGap="0.0" layoutX="152.0" layoutY="100.0" mnemonicParsing="false" onAction="#Switch_to_scene2" prefHeight="61.0" prefWidth="138.0" text="Start a game!" />
                </children>
             </Pane>
          </center>
       </BorderPane>
    </children>
-</StackPane>
+</VBox>

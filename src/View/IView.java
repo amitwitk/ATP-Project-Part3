@@ -16,4 +16,6 @@ public interface IView {
     void setViewModel(MyViewModel viewModel);
 
     void setStage(Stage pstage);
+
+    void set_head_scene(Scene scene);
 }
