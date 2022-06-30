@@ -81,6 +81,7 @@ public class MyModel extends Observable implements IModel {
                         updateSolution(mazeSolution);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        LOG.error(e.getMessage());
                     }
 
                 }
@@ -88,8 +89,10 @@ public class MyModel extends Observable implements IModel {
             client.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
+            LOG.error(e.getMessage());
         }
-        String str = "hi tal is gay";
+
+        String str = "Serching algorithm was: " + getSearching() + "\nThe souliton length was : " + this.solution.getSolutionPath().size();
         LOG.info(str);
 
     }
@@ -242,6 +245,7 @@ public class MyModel extends Observable implements IModel {
         playerCol= start_col;
         setChanged();
         notifyObservers("generated");
+
     }
     //from part 2
     private void CommunicateWithServer_MazeGenerating(int my_row, int my_col) {
@@ -264,13 +268,21 @@ public class MyModel extends Observable implements IModel {
                         //maze.print();
                     } catch (Exception e) {
                         e.printStackTrace();
+                        LOG.error(e.getMessage());
                     }
                 }
             });
             client.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
+            LOG.error(e.getMessage());
         }
+        String str = "The maze that was generated is: (" + maze.getRows() + "," + maze.getColumns() + ")" +
+                "\nThe maze start position is: ("+ maze.getStartPosition().getRowIndex() + "," + maze.getStartPosition().getColumnIndex() + ")" +
+                "\nThe goal position is : ("+maze.getGoalPosition().getRowIndex() + "," + maze.getGoalPosition().getColumnIndex() + ")" +
+                "\nMaze type was :" + getGenerating();
+        LOG.info(str);
+
     }
 
     private void updateMaze(Maze maze) {this.maze = maze;}

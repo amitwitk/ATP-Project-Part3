@@ -40,7 +40,7 @@
                </image></ImageView>
          </center>
          <bottom>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="51.0" text="GO!" BorderPane.alignment="CENTER" />
+            <Button fx:id="GoButton" onAction="#Switch_to_scene2" mnemonicParsing="false" prefHeight="32.0" prefWidth="51.0" text="GO!" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>
