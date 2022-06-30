@@ -14,7 +14,15 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="ATP-ProjectJAR" level="project" />
+    <orderEntry type="module-library">
+      <library name="ATP-ProjectJAR">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../ATP-ProjectJAR.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="ATP-ProjectJAR1" level="project" />
     <orderEntry type="library" name="lib2" level="project" />

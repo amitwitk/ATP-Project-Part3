@@ -85,7 +85,7 @@ public class MyViewController implements IView, Observer {
 
 
     @FXML
-    BorderPane HeadBorder;
+    BorderPane head_border;
     @FXML
     ImageView myImageView;
 
@@ -104,6 +104,7 @@ public class MyViewController implements IView, Observer {
         view.set_Resize(scene);
         view.setViewModel(ViewModel);
         view.setStage(Pstage);
+        view.checkMute();
         ViewModel.addObserver((Observer)view);
         MyModel mymodel = (MyModel)model;
         mymodel.addObserver(ViewModel);
@@ -112,6 +113,9 @@ public class MyViewController implements IView, Observer {
         //MuteButton.setDisable(true);
 
     }
+
+
+
 
     public void Switch_to_scene2_after_choose(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
@@ -186,6 +190,7 @@ public class MyViewController implements IView, Observer {
     public void setUpdatePlayerCol(int updatePlayerCol) {this.updatePlayerCol.set(updatePlayerCol + "");}
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
+        MuteButton.setDisable(true);
         music();
     }
     public void setViewModel(MyViewModel vm) {ViewModel = vm;}
@@ -374,6 +379,14 @@ public class MyViewController implements IView, Observer {
             MuteButton.setStyle("-fx-background-color: linear-gradient(#7cafc2,#86c1b9)");
             isMuted=false;}
         mazeDisplayer.requestFocus();
+    }
+
+    public void checkMute()
+    {
+        if (this.mediaPlayer == null)
+        {
+            MuteButton.setDisable(true);
+        }
     }
 
 

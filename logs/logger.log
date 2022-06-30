@@ -148,3 +148,15 @@ The goal position is : (40,0)
 Maze type was :MyMazeGenerator
 2022.06.30 16:50:09.759 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
 The souliton length was : 22
+2022.06.30 17:12:29.203 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (7,49)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 17:12:33.593 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,44)
+The goal position is : (2,0)
+Maze type was :MyMazeGenerator
+2022.06.30 17:19:37.442 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,34)
+The goal position is : (0,0)
+Maze type was :MyMazeGenerator

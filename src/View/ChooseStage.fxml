@@ -35,10 +35,10 @@
             </Button>
          </left>
          <center>
-            <ImageView fx:id="myImageView" fitHeight="137.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="images/IcyTower.PNG" />
-               </image></ImageView>
+<!--            <ImageView fx:id="myImageView" fitHeight="137.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">-->
+<!--               <image>-->
+<!--                  <Image url="images/IcyTower.PNG" />-->
+<!--               </image></ImageView>-->
          </center>
          <bottom>
             <Button fx:id="GoButton" onAction="#Switch_to_scene2_after_choose" mnemonicParsing="false" prefHeight="32.0" prefWidth="51.0" text="GO!" BorderPane.alignment="CENTER" />

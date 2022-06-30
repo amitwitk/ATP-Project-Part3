@@ -18,4 +18,6 @@ public interface IView {
     void setStage(Stage pstage);
 
     void set_head_scene(Scene scene);
+    public void checkMute();
+
 }

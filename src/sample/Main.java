@@ -25,6 +25,7 @@ public class Main extends Application {
         IView view = fxmlLoader.getController();
         view.set_head_scene(scene);
         view.setStage(primaryStage);
+        //view.resizeVbox();
         primaryStage.show();
 
 
