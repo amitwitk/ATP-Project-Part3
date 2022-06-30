@@ -72,7 +72,7 @@ public class MyViewController implements IView, Observer {
     Parent root;
     Stage Pstage;
     @FXML
-    AnchorPane ScenePane;
+    VBox ScenePane;
     @FXML
     BorderPane ChoosePane;
 
@@ -83,6 +83,9 @@ public class MyViewController implements IView, Observer {
     @FXML
     BorderPane headPane;
 
+
+    @FXML
+    BorderPane HeadBorder;
     @FXML
     ImageView myImageView;
 
@@ -94,7 +97,27 @@ public class MyViewController implements IView, Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,400,300);
+        scene = new Scene(root,HeadStagePane.getWidth(),HeadStagePane.getHeight());
+        IModel model = new MyModel();
+        MyViewModel ViewModel = new MyViewModel(model);
+        IView view = fxmlLoader.getController();
+        view.set_Resize(scene);
+        view.setViewModel(ViewModel);
+        view.setStage(Pstage);
+        ViewModel.addObserver((Observer)view);
+        MyModel mymodel = (MyModel)model;
+        mymodel.addObserver(ViewModel);
+        Pstage.setScene(scene);
+        Pstage.show();
+        //MuteButton.setDisable(true);
+
+    }
+
+    public void Switch_to_scene2_after_choose(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
+        Parent root = fxmlLoader.load();
+        Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root,ScenePane.getWidth(),ScenePane.getHeight());
         IModel model = new MyModel();
         MyViewModel ViewModel = new MyViewModel(model);
         IView view = fxmlLoader.getController();
@@ -117,7 +140,7 @@ public class MyViewController implements IView, Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChooseStage.fxml"));
         Parent root = fxmlLoader.load();
         Pstage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,400,300);
+        scene = new Scene(root,myBorderPane.getWidth(),myBorderPane.getHeight());
         try {
             scene.getStylesheets().add(getClass().getResource("MainStyle.css").toExternalForm());
         }
@@ -146,8 +169,8 @@ public class MyViewController implements IView, Observer {
 
     }
     public void set_head_scene(Scene scene){
-        MyImage.fitHeightProperty().bind(HeadStagePane.heightProperty());
-        MyImage.fitWidthProperty().bind(HeadStagePane.widthProperty());
+//        MyImage.fitHeightProperty().bind(HeadStagePane.heightProperty());
+//        MyImage.fitWidthProperty().bind(HeadStagePane.widthProperty());
 
 
     }
