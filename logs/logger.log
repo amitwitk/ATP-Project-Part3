@@ -160,3 +160,9 @@ Maze type was :MyMazeGenerator
 The maze start position is: (0,34)
 The goal position is : (0,0)
 Maze type was :MyMazeGenerator
+2022.06.30 17:26:12.188 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,13)
+The goal position is : (31,49)
+Maze type was :MyMazeGenerator
+2022.06.30 17:26:27.686 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 49

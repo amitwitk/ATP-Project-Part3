@@ -15,11 +15,11 @@
          <center>
             <Pane prefHeight="203.0" prefWidth="120.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="MyImage" fitHeight="402.0" fitWidth="602.0" layoutX="-166.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="images/bc0ger.jpg" />
-                     </image>
-                  </ImageView>
+<!--                  <ImageView fx:id="MyImage" fitHeight="402.0" fitWidth="602.0" layoutX="-166.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                     <image>-->
+<!--                        <Image url="images/bc0ger.jpg" />-->
+<!--                     </image>-->
+<!--                  </ImageView>-->
                   <Button fx:id="StartB" graphicTextGap="0.0" layoutX="148.0" layoutY="90.0" mnemonicParsing="false" onAction="#Switch_to_scene2" prefHeight="61.0" prefWidth="138.0" text="Start a game!" BorderPane.alignment="CENTER"/>
                   <Pane layoutX="52.0" layoutY="26.0" prefHeight="55.0" prefWidth="362.0" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
                      <children>
