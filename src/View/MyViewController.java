@@ -454,6 +454,8 @@ public class MyViewController implements IView, Observer {
     public void setStage(Stage s) {this.stage = s;}
 
     public void Load(ActionEvent actionEvent) {
+        MuteButton.setDisable(false);
+        music();
         FileChooser fs = new FileChooser();
         fs.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Maze",".maze"));
         File my_file = fs.showOpenDialog(stage);
