@@ -128,6 +128,7 @@ public class MyViewController implements IView, Observer {
         view.set_Resize(scene);
         view.setViewModel(ViewModel);
         view.setStage(Pstage);
+        view.checkMute();
         ViewModel.addObserver((Observer)view);
         MyModel mymodel = (MyModel)model;
         mymodel.addObserver(ViewModel);
@@ -190,7 +191,7 @@ public class MyViewController implements IView, Observer {
     public void setUpdatePlayerCol(int updatePlayerCol) {this.updatePlayerCol.set(updatePlayerCol + "");}
     public void generateMazeButton () {
         ViewModel.generateMaze(Integer.parseInt(Rows_textBox.getText()), Integer.parseInt(Col_textBox.getText()));
-        MuteButton.setDisable(true);
+        MuteButton.setDisable(false);
         music();
     }
     public void setViewModel(MyViewModel vm) {ViewModel = vm;}

@@ -202,3 +202,187 @@ The goal position is : (6,0)
 Maze type was :MyMazeGenerator
 2022.06.30 17:33:05.004 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
 The souliton length was : 36
+2022.06.30 18:12:50.950 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (35,49)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 18:12:55.413 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (1,0)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 18:12:56.346 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 49
+2022.06.30 18:13:01.774 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,21)
+The goal position is : (12,49)
+Maze type was :MyMazeGenerator
+2022.06.30 18:13:08.210 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,3)
+The goal position is : (0,1)
+Maze type was :MyMazeGenerator
+2022.06.30 18:13:11.647 INFO  Model.MyModel - The maze that was generated is: (100,100)
+The maze start position is: (69,0)
+The goal position is : (99,0)
+Maze type was :MyMazeGenerator
+2022.06.30 18:13:51.676 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 49
+2022.06.30 18:14:49.575 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,40)
+The goal position is : (0,0)
+Maze type was :MyMazeGenerator
+2022.06.30 18:14:50.581 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 59
+2022.06.30 18:14:54.336 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,48)
+The goal position is : (0,0)
+Maze type was :MyMazeGenerator
+2022.06.30 18:14:55.018 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 57
+2022.06.30 18:15:48.418 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,31)
+The goal position is : (49,19)
+Maze type was :MyMazeGenerator
+2022.06.30 18:15:49.299 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 15
+2022.06.30 21:33:34.088 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,49)
+The goal position is : (0,38)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:37.936 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 12
+2022.06.30 21:33:39.816 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (19,0)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:40.454 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,48)
+The goal position is : (44,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:40.947 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (5,0)
+The goal position is : (42,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:41.380 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,48)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:41.797 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,43)
+The goal position is : (42,49)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:43.954 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 48
+2022.06.30 21:33:45.631 INFO  Model.MyModel - Serching algorithm was: BestFirstSearch
+The souliton length was : 48
+2022.06.30 21:33:46.005 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,15)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:50.024 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,41)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:51.706 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,41)
+The goal position is : (0,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:52.121 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (34,49)
+The goal position is : (0,43)
+Maze type was :MyMazeGenerator
+2022.06.30 21:33:52.661 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (8,0)
+The goal position is : (0,22)
+Maze type was :MyMazeGenerator
+2022.06.30 21:34:52.080 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,24)
+The goal position is : (25,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:00.421 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,40)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:00.850 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,35)
+The goal position is : (0,19)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:01.251 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (35,0)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:01.691 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (21,0)
+The goal position is : (49,13)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:03.695 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (30,0)
+The goal position is : (0,32)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:04.149 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (9,49)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:35:04.650 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (15,49)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:36:25.761 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (40,0)
+The goal position is : (0,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:36:29.020 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,17)
+The goal position is : (33,49)
+Maze type was :MyMazeGenerator
+2022.06.30 21:36:29.551 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (14,49)
+The goal position is : (0,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:36:29.973 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,7)
+The goal position is : (38,49)
+Maze type was :MyMazeGenerator
+2022.06.30 21:38:56.036 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (26,49)
+The goal position is : (0,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:38:59.193 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (12,0)
+The goal position is : (0,8)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:00.942 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,24)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:01.388 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (27,0)
+The goal position is : (49,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:01.635 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,31)
+The goal position is : (0,4)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:01.815 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,22)
+The goal position is : (37,0)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:01.971 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (39,49)
+The goal position is : (49,38)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:06.479 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (0,49)
+The goal position is : (0,24)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:08.054 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (49,29)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:08.710 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (19,49)
+The goal position is : (49,27)
+Maze type was :MyMazeGenerator
+2022.06.30 21:39:37.134 INFO  Model.MyModel - The maze that was generated is: (50,50)
+The maze start position is: (13,49)
+The goal position is : (49,1)
+Maze type was :MyMazeGenerator
